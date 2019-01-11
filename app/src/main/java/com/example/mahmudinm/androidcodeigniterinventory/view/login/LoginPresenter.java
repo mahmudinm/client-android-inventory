@@ -32,7 +32,7 @@ public class LoginPresenter {
                         @Override
                         public void onNext(AuthResponse authResponse) {
                             view.hideProgress();
-                            if (authResponse.getStatus().equals("succes")) {
+                            if (authResponse.getStatus().equals("success")) {
                                 view.statusSuccess(authResponse);
                             } else {
                                 view.statusError(authResponse.getStatus());
