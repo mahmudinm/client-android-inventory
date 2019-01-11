@@ -17,6 +17,9 @@ import com.example.mahmudinm.androidcodeigniterinventory.network.response.AuthRe
 import com.example.mahmudinm.androidcodeigniterinventory.utils.SessionManager;
 import com.example.mahmudinm.androidcodeigniterinventory.view.main.MainActivity;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -29,14 +32,14 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     ProgressDialog progressDialog;
     SessionManager sessionManager;
 
-    String username, password;
-    Button login;
-    EditText txtUsername, txtPassword;
+    @BindView(R.id.txtUsername) EditText username;
+    @BindView(R.id.txtPassword) EditText password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ButterKnife.bind(this);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading");
@@ -44,25 +47,19 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         presenter = new LoginPresenter(this);
         sessionManager = new SessionManager(getApplicationContext());
 
-        txtUsername = findViewById(R.id.txtUsername);
-        txtPassword = findViewById(R.id.txtPassword);
-        login = findViewById(R.id.login);
 
         if (sessionManager.isLoggedIn()) {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
         }
 
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    }
 
-                username = txtUsername.getText().toString();
-                password = txtPassword.getText().toString();
-
-                presenter.loginAuth(username, password);
-            }
-        });
+    @OnClick(R.id.login) void login() {
+        presenter.loginAuth(
+                username.getText().toString(),
+                password.getText().toString()
+        );
     }
 
     @Override
