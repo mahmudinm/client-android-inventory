@@ -3,7 +3,7 @@ package com.example.mahmudinm.androidcodeigniterinventory.network.response;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class AuthResponse {
+public class AuthResponse extends BaseResponse{
 
     @Expose
     @SerializedName("token") String token;
