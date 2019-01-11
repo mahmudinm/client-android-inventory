@@ -9,10 +9,10 @@ public class AuthResponse extends BaseResponse{
     @SerializedName("token") String token;
 
     @Expose
-    @SerializedName("token") String username;
+    @SerializedName("username") String username;
 
     @Expose
-    @SerializedName("token") String id;
+    @SerializedName("id") String id;
 
     public String getToken() {
         return token;

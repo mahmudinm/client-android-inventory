@@ -9,20 +9,20 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class LoginPresenter implements LoginContract.Presenter {
+public class LoginPresenter {
 
-    private LoginContract.View view;
+    private LoginView view;
     private ApiInterface apiInterface;
     private CompositeDisposable compositeDisposable;
 
-    public LoginPresenter(LoginContract.View view) {
+    public LoginPresenter(LoginView view) {
         this.view = view;
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
         compositeDisposable = new CompositeDisposable();
     }
 
-    @Override
-    public void postAuth(String username, String password) {
+
+    public void loginAuth(String username, String password) {
         view.showProgress();
         compositeDisposable.add(
           apiInterface.postAuth(username, password)
@@ -32,10 +32,10 @@ public class LoginPresenter implements LoginContract.Presenter {
                         @Override
                         public void onNext(AuthResponse authResponse) {
                             view.hideProgress();
-                            if (authResponse.getStatus().equals("success")) {
-                                view.statusSuccess(authResponse.getToken());
+                            if (authResponse.getStatus().equals("succes")) {
+                                view.statusSuccess(authResponse);
                             } else {
-                                view.statusError("password atau username salah");
+                                view.statusError(authResponse.getStatus());
                             }
                         }
 

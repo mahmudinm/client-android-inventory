@@ -3,15 +3,24 @@ package com.example.mahmudinm.androidcodeigniterinventory.view.login;
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.mahmudinm.androidcodeigniterinventory.R;
+import com.example.mahmudinm.androidcodeigniterinventory.network.ApiClient;
+import com.example.mahmudinm.androidcodeigniterinventory.network.ApiInterface;
+import com.example.mahmudinm.androidcodeigniterinventory.network.response.AuthResponse;
+
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 
-public class LoginActivity extends AppCompatActivity implements LoginContract.View{
+public class LoginActivity extends AppCompatActivity implements LoginView {
 
     LoginPresenter presenter;
     ProgressDialog progressDialog;
@@ -33,13 +42,14 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         txtPassword = findViewById(R.id.txtPassword);
         login = findViewById(R.id.login);
 
-        username = txtUsername.getText().toString();
-        password = txtPassword.getText().toString();
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.postAuth(username, password);
+
+                username = txtUsername.getText().toString();
+                password = txtPassword.getText().toString();
+
+                presenter.loginAuth(username, password);
             }
         });
     }
@@ -56,13 +66,14 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     }
 
     @Override
-    public void statusSuccess(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    public void statusSuccess(AuthResponse authResponse) {
+        Toast.makeText(this, authResponse.getToken(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void statusError(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        Log.d("Error", "statusError: " + message);
 
     }
 }
