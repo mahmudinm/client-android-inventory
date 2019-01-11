@@ -15,7 +15,7 @@ import com.example.mahmudinm.androidcodeigniterinventory.network.ApiClient;
 import com.example.mahmudinm.androidcodeigniterinventory.network.ApiInterface;
 import com.example.mahmudinm.androidcodeigniterinventory.network.response.AuthResponse;
 import com.example.mahmudinm.androidcodeigniterinventory.utils.SessionManager;
-import com.example.mahmudinm.androidcodeigniterinventory.view.login.main.MainActivity;
+import com.example.mahmudinm.androidcodeigniterinventory.view.main.MainActivity;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
