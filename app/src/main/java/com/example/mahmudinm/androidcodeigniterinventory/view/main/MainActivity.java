@@ -15,6 +15,7 @@ import android.view.MenuItem;
 
 import com.example.mahmudinm.androidcodeigniterinventory.R;
 import com.example.mahmudinm.androidcodeigniterinventory.utils.SessionManager;
+import com.example.mahmudinm.androidcodeigniterinventory.view.supplier.SupplierFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -29,15 +30,6 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         sessionManager = new SessionManager(getApplicationContext());
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -70,7 +62,10 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_barang) {
 
         } else if (id == R.id.nav_supplier) {
-
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.mainFrame, new SupplierFragment())
+                    .commit();
         } else if (id == R.id.nav_logout) {
             sessionManager.logoutUser();
         }
