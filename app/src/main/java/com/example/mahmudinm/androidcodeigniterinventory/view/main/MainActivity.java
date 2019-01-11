@@ -65,11 +65,11 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_penjualan) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_barang) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_supplier) {
 
         } else if (id == R.id.nav_logout) {
             sessionManager.logoutUser();
