@@ -47,4 +47,46 @@
 
     </android.support.design.widget.TextInputLayout>
 
+    <LinearLayout
+        android:visibility="gone"
+        android:gravity="center|bottom"
+        android:layout_weight="1"
+        android:weightSum="1.0"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dip">
+
+        <Button
+            android:id="@+id/simpan"
+            android:text="Simpan"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_width="0dip" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center|bottom"
+        android:layout_weight="1"
+        android:weightSum="1.0"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dip">
+
+        <Button
+            android:id="@+id/hapus"
+            android:text="Hapus"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3"
+            android:layout_width="0dip" />
+
+        <Button
+            android:id="@+id/update"
+            android:text="Update"
+            android:layout_height="wrap_content"
+            android:layout_weight=".7"
+            android:layout_width="0dip" />
+
+    </LinearLayout>
+
 </LinearLayout>

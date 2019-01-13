@@ -11,5 +11,6 @@ public class ESupplierActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_esupplier);
+        getSupportActionBar().setTitle("Edit Tambah Supplier");
     }
 }
