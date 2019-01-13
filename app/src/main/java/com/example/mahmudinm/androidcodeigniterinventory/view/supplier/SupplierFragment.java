@@ -2,8 +2,10 @@ package com.example.mahmudinm.androidcodeigniterinventory.view.supplier;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,6 +22,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,6 +38,9 @@ public class SupplierFragment extends Fragment implements SupplierView{
 
     @BindView(R.id.recyclerSupplier)
     RecyclerView recyclerView;
+
+    @BindView(R.id.swipe_refresh)
+    SwipeRefreshLayout swipe;
 
 
     public SupplierFragment() {
@@ -58,7 +64,21 @@ public class SupplierFragment extends Fragment implements SupplierView{
         presenter = new SupplierPresenter(this);
         presenter.getSuppliers(session.getKeyToken());
 
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                presenter.getSuppliers(session.getKeyToken());
+            }
+        });
+
+
         return x;
+    }
+
+
+    @OnClick(R.id.supplierFab) void editor() {
+        Intent intent = new Intent(getActivity(), ESupplierActivity.class);
+        startActivity(intent);
     }
 
     @Override

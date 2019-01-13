@@ -13,8 +13,6 @@ import com.example.mahmudinm.androidcodeigniterinventory.model.Supplier;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHolder> {
 
@@ -24,12 +22,15 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHo
         this.suppliers = suppliers;
     }
 
+
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_supplier,
                 viewGroup, false);
 //        ButterKnife.bind(this, view);
+
         return new ViewHolder(view);
     }
 

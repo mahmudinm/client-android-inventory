@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
-    private static final String url = "http://192.168.100.3/android_codeigniter_inventory/api/";
+    private static final String url = "https://ef26e650.ngrok.io/android_codeigniter_inventory/api/";
 
     private static Retrofit retrofit;
 
