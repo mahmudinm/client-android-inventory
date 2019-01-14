@@ -3,10 +3,12 @@ package com.example.mahmudinm.androidcodeigniterinventory.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 public class Supplier {
 
     @Expose
-    @SerializedName("id") int id;
+    @SerializedName("id") String id;
     @Expose
     @SerializedName("nama") String nama;
     @Expose
@@ -14,11 +16,11 @@ public class Supplier {
     @Expose
     @SerializedName("alamat") String alamat;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

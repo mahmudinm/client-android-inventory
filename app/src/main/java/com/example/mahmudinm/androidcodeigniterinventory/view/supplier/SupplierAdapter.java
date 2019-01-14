@@ -22,8 +22,6 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHo
         this.suppliers = suppliers;
     }
 
-
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -37,6 +35,7 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Supplier supplier = suppliers.get(i);
+//        viewHolder.id.setText(supplier.getId());
         viewHolder.nama.setText(supplier.getNama());
         viewHolder.no_hp.setText(supplier.getNo_hp());
         viewHolder.alamat.setText(supplier.getAlamat());
@@ -47,12 +46,17 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHo
         return suppliers.size();
     }
 
+    public Supplier getSupplier(int position) {
+        return suppliers.get(position);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 //        @BindView(R.id.nama) EditText nama;
-        TextView nama, no_hp, alamat;
+        TextView nama, no_hp, alamat, id;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+//            id = itemView.findViewById(R.id.nomor);
             nama = itemView.findViewById(R.id.nama);
             no_hp = itemView.findViewById(R.id.no_hp);
             alamat = itemView.findViewById(R.id.alamat);

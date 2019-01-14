@@ -1,9 +1,12 @@
 package com.example.mahmudinm.androidcodeigniterinventory.view.supplier;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.mahmudinm.androidcodeigniterinventory.R;
@@ -19,21 +22,27 @@ public class ESupplierActivity extends AppCompatActivity implements ESupplierVie
     ProgressDialog progressDialog;
     SessionManager session;
 
+    String id, nama, no_hp, alamat;
+
     @BindView(R.id.nama)
-    EditText nama;
+    EditText txtNama;
 
     @BindView(R.id.no_hp)
-    EditText no_hp;
+    EditText txtNo_hp;
 
     @BindView(R.id.alamat)
-    EditText alamat;
+    EditText txtAlamat;
 
+    @BindView(R.id.content_simpan)
+    LinearLayout content_simpan;
+
+    @BindView(R.id.content_update)
+    LinearLayout content_update;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_esupplier);
-        getSupportActionBar().setTitle("Edit Tambah Supplier");
 
         ButterKnife.bind(this);
 
@@ -43,14 +52,21 @@ public class ESupplierActivity extends AppCompatActivity implements ESupplierVie
         progressDialog.setMessage("Loading ...");
         presenter = new ESupplierPresenter(this);
 
+        Intent intent= getIntent();
+        id = intent.getStringExtra("id");
+        nama = intent.getStringExtra("nama");
+        no_hp = intent.getStringExtra("no_hp");
+        alamat = intent.getStringExtra("alamat");
+
+        initDataIntent();
     }
 
     @OnClick(R.id.simpan) void simpan(){
         presenter.saveSupplier(
                 session.getKeyToken(),
-                nama.getText().toString(),
-                no_hp.getText().toString(),
-                alamat.getText().toString()
+                txtNama.getText().toString(),
+                txtNo_hp.getText().toString(),
+                txtAlamat.getText().toString()
         );
     }
 
@@ -75,5 +91,18 @@ public class ESupplierActivity extends AppCompatActivity implements ESupplierVie
     @Override
     public void statusError(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void initDataIntent() {
+        if (id != null) {
+            getSupportActionBar().setTitle("Update data");
+            txtNama.setText(nama);
+            txtAlamat.setText(alamat);
+            txtNo_hp.setText(no_hp);
+            content_update.setVisibility(View.VISIBLE);
+            content_simpan.setVisibility(View.GONE);
+        } else {
+            getSupportActionBar().setTitle("Simpan data");
+        }
     }
 }

@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import com.example.mahmudinm.androidcodeigniterinventory.R;
 import com.example.mahmudinm.androidcodeigniterinventory.model.Supplier;
 import com.example.mahmudinm.androidcodeigniterinventory.network.response.SupplierResponse;
+import com.example.mahmudinm.androidcodeigniterinventory.utils.RecyclerItemClickListener;
 import com.example.mahmudinm.androidcodeigniterinventory.utils.SessionManager;
 
 import java.util.List;
@@ -35,7 +37,6 @@ public class SupplierFragment extends Fragment implements SupplierView{
     SupplierPresenter presenter;
     SessionManager session;
     SupplierAdapter adapter;
-    List<Supplier> suppliers;
 
     private static final int REQUEST_ADD = 1;
     private static final int REQUEST_UPDATE = 1;
@@ -98,7 +99,24 @@ public class SupplierFragment extends Fragment implements SupplierView{
     @Override
     public void statusSuccess(SupplierResponse supplierResponse) {
         adapter = new SupplierAdapter(supplierResponse.getData());
+        Log.d("test", "statusSuccess: " + supplierResponse.getData());
         recyclerView.setAdapter(adapter);
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(),
+                new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Supplier supplier = adapter.getSupplier(position);
+
+                        Intent intent = new Intent(getActivity(), ESupplierActivity.class);
+
+                        intent.putExtra("id", supplier.getId());
+                        intent.putExtra("nama", supplier.getNama());
+                        intent.putExtra("no_hp", supplier.getNo_hp());
+                        intent.putExtra("alamat", supplier.getAlamat());
+
+                        startActivityForResult(intent, REQUEST_UPDATE);
+                    }
+                }));
         adapter.notifyDataSetChanged();
     }
 
