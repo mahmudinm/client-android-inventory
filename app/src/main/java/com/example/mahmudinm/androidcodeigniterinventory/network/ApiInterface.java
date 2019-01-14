@@ -49,6 +49,6 @@ public interface ApiInterface {
     @GET("barang")
     Observable<BarangResponse> getBarang(@Header("Authorization") String token);
 
-    
+
 
 }
