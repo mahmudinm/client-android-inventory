@@ -71,13 +71,21 @@ public class ESupplierActivity extends AppCompatActivity implements ESupplierVie
     }
 
     @OnClick(R.id.update) void update() {
-//        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
         presenter.updateSupplier(
                 session.getKeyToken(),
                 id,
                 txtNama.getText().toString(),
                 txtNo_hp.getText().toString(),
                 txtAlamat.getText().toString()
+        );
+    }
+
+
+    @OnClick(R.id.hapus) void hapus() {
+//        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
+        presenter.deleteSupplier(
+                session.getKeyToken(),
+                id
         );
     }
 

@@ -70,4 +70,28 @@ public class ESupplierPresenter {
         );
     }
 
+    void deleteSupplier(String token, String id) {
+        view.showProgress();
+        disposable.add(
+                apiInterface.deleteSupplier(token, id)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribeWith(new DisposableCompletableObserver(){
+                                @Override
+                                public void onComplete() {
+                                    view.hideProgress();
+                                    view.statusSuccess("berhasil delete");
+                                }
+
+                                @Override
+                                public void onError(Throwable e) {
+                                    view.hideProgress();
+                                    view.statusError(e.getLocalizedMessage());
+                                }
+                            })
+        );
+    }
+
+
+
 }

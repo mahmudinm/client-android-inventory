@@ -39,5 +39,10 @@ public interface ApiInterface {
                              @Field("no_hp") String no_hp,
                              @Field("alamat") String alamat);
 
+//    @FormUrlEncoded
+    @POST("supplier/delete/{id}")
+    Completable deleteSupplier(@Header("Authorization") String token,
+                               @Path("id") String id);
+
 
 }
