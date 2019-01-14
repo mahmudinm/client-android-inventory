@@ -23,7 +23,8 @@ public interface ApiInterface {
     Observable<SupplierResponse> getSuppliers(@Header("Authorization") String token);
 
     @FormUrlEncoded
-    Observable<SupplierResponse> postSuppliers(@Header("Authorization") String token,
+    @POST("supplier")
+    Observable<SupplierResponse> saveSupplier(@Header("Authorization") String token,
                                                @Field("nama") String nama,
                                                @Field("no_hp") String no_hp,
                                                @Field("alamat") String alamat);

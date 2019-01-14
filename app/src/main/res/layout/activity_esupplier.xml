@@ -48,13 +48,14 @@
     </android.support.design.widget.TextInputLayout>
 
     <LinearLayout
-        android:visibility="gone"
+        android:id="@+id/content_simpan"
         android:gravity="center|bottom"
         android:layout_weight="1"
         android:weightSum="1.0"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="0dip">
+        android:layout_height="0dip"
+        android:layout_marginBottom="10dp">
 
         <Button
             android:id="@+id/simpan"
@@ -66,12 +67,15 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/content_update"
+        android:visibility="gone"
         android:gravity="center|bottom"
         android:layout_weight="1"
         android:weightSum="1.0"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="0dip">
+        android:layout_height="0dip"
+        android:layout_marginBottom="10dp">
 
         <Button
             android:id="@+id/hapus"

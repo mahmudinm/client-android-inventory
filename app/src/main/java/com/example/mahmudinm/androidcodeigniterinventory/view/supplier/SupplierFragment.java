@@ -24,6 +24,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -31,10 +33,13 @@ public class SupplierFragment extends Fragment implements SupplierView{
 
     ProgressDialog progressDialog;
     SupplierPresenter presenter;
-//    RecyclerView.LayoutManager manager;
     SessionManager session;
     SupplierAdapter adapter;
     List<Supplier> suppliers;
+
+    private static final int REQUEST_ADD = 1;
+    private static final int REQUEST_UPDATE = 1;
+
 
     @BindView(R.id.recyclerSupplier)
     RecyclerView recyclerView;
@@ -71,14 +76,13 @@ public class SupplierFragment extends Fragment implements SupplierView{
             }
         });
 
-
         return x;
     }
 
 
     @OnClick(R.id.supplierFab) void editor() {
         Intent intent = new Intent(getActivity(), ESupplierActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, REQUEST_ADD);
     }
 
     @Override
@@ -89,7 +93,6 @@ public class SupplierFragment extends Fragment implements SupplierView{
     @Override
     public void hideProgress() {
         progressDialog.dismiss();
-
     }
 
     @Override
@@ -102,5 +105,15 @@ public class SupplierFragment extends Fragment implements SupplierView{
     @Override
     public void statusError(String message) {
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_ADD && resultCode == RESULT_OK) {
+            presenter.getSuppliers(session.getKeyToken());
+        } else if (requestCode == REQUEST_UPDATE && resultCode == RESULT_OK) {
+            presenter.getSuppliers(session.getKeyToken());
+        }
     }
 }
