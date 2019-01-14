@@ -1,6 +1,7 @@
 package com.example.mahmudinm.androidcodeigniterinventory.network;
 
 import com.example.mahmudinm.androidcodeigniterinventory.network.response.AuthResponse;
+import com.example.mahmudinm.androidcodeigniterinventory.network.response.BarangResponse;
 import com.example.mahmudinm.androidcodeigniterinventory.network.response.SupplierResponse;
 
 import io.reactivex.Completable;
@@ -14,13 +15,13 @@ import retrofit2.http.Path;
 
 public interface ApiInterface {
 
-    //Auth
+//Auth
     @FormUrlEncoded
     @POST("auth")
     Observable<AuthResponse> postAuth(@Field("username") String username,
                                       @Field("password") String password);
 
-    //Supplier CRUD
+//Supplier CRUD
     @GET("supplier")
     Observable<SupplierResponse> getSuppliers(@Header("Authorization") String token);
 
@@ -44,5 +45,10 @@ public interface ApiInterface {
     Completable deleteSupplier(@Header("Authorization") String token,
                                @Path("id") String id);
 
+//Barang CRUD
+    @GET("barang")
+    Observable<BarangResponse> getBarang(@Header("Authorization") String token);
+
+    
 
 }

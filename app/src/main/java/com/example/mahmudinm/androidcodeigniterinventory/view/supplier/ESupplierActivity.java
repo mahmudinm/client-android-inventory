@@ -82,7 +82,6 @@ public class ESupplierActivity extends AppCompatActivity implements ESupplierVie
 
 
     @OnClick(R.id.hapus) void hapus() {
-//        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
         presenter.deleteSupplier(
                 session.getKeyToken(),
                 id
