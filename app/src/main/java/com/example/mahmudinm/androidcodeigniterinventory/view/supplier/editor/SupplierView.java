@@ -1,6 +1,6 @@
 package com.example.mahmudinm.androidcodeigniterinventory.view.supplier.editor;
 
-public interface ESupplierView {
+public interface SupplierView {
 
     void showProgress();
     void hideProgress();

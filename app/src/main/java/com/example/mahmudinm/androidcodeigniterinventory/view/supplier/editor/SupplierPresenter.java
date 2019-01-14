@@ -10,13 +10,13 @@ import io.reactivex.observers.DisposableCompletableObserver;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class ESupplierPresenter {
+public class SupplierPresenter {
 
-    ESupplierView view;
+    SupplierView view;
     CompositeDisposable disposable;
     ApiInterface apiInterface;
 
-    public ESupplierPresenter(ESupplierView view) {
+    public SupplierPresenter(SupplierView view) {
         this.view = view;
         disposable = new CompositeDisposable();
         apiInterface = ApiClient.getClient().create(ApiInterface.class);

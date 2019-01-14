@@ -16,9 +16,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ESupplierActivity extends AppCompatActivity implements ESupplierView{
+public class SupplierActivity extends AppCompatActivity implements SupplierView {
 
-    ESupplierPresenter presenter;
+    SupplierPresenter presenter;
     ProgressDialog progressDialog;
     SessionManager session;
 
@@ -42,7 +42,7 @@ public class ESupplierActivity extends AppCompatActivity implements ESupplierVie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_esupplier);
+        setContentView(R.layout.activity_supplier);
 
         ButterKnife.bind(this);
 
@@ -50,7 +50,7 @@ public class ESupplierActivity extends AppCompatActivity implements ESupplierVie
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading ...");
-        presenter = new ESupplierPresenter(this);
+        presenter = new SupplierPresenter(this);
 
         Intent intent= getIntent();
         id = intent.getStringExtra("id");

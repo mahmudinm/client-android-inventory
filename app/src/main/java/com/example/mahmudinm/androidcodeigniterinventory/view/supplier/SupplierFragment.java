@@ -19,7 +19,7 @@ import com.example.mahmudinm.androidcodeigniterinventory.model.Supplier;
 import com.example.mahmudinm.androidcodeigniterinventory.network.response.SupplierResponse;
 import com.example.mahmudinm.androidcodeigniterinventory.utils.RecyclerItemClickListener;
 import com.example.mahmudinm.androidcodeigniterinventory.utils.SessionManager;
-import com.example.mahmudinm.androidcodeigniterinventory.view.supplier.editor.ESupplierActivity;
+import com.example.mahmudinm.androidcodeigniterinventory.view.supplier.editor.SupplierActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -81,7 +81,7 @@ public class SupplierFragment extends Fragment implements SupplierView{
 
 
     @OnClick(R.id.supplierFab) void editor() {
-        Intent intent = new Intent(getActivity(), ESupplierActivity.class);
+        Intent intent = new Intent(getActivity(), SupplierActivity.class);
         startActivityForResult(intent, REQUEST_ADD);
     }
 
@@ -106,7 +106,7 @@ public class SupplierFragment extends Fragment implements SupplierView{
                     public void onItemClick(View view, int position) {
                         Supplier supplier = adapter.getSupplier(position);
 
-                        Intent intent = new Intent(getActivity(), ESupplierActivity.class);
+                        Intent intent = new Intent(getActivity(), SupplierActivity.class);
 
                         intent.putExtra("id", supplier.getId());
                         intent.putExtra("nama", supplier.getNama());
