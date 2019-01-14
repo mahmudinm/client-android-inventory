@@ -19,8 +19,7 @@ import com.example.mahmudinm.androidcodeigniterinventory.model.Supplier;
 import com.example.mahmudinm.androidcodeigniterinventory.network.response.SupplierResponse;
 import com.example.mahmudinm.androidcodeigniterinventory.utils.RecyclerItemClickListener;
 import com.example.mahmudinm.androidcodeigniterinventory.utils.SessionManager;
-
-import java.util.List;
+import com.example.mahmudinm.androidcodeigniterinventory.view.supplier.editor.ESupplierActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

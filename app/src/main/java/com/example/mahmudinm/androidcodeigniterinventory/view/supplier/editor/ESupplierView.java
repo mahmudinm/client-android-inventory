@@ -1,4 +1,4 @@
-package com.example.mahmudinm.androidcodeigniterinventory.view.supplier;
+package com.example.mahmudinm.androidcodeigniterinventory.view.supplier.editor;
 
 public interface ESupplierView {
 

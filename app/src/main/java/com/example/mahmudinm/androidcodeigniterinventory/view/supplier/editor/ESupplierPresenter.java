@@ -1,4 +1,4 @@
-package com.example.mahmudinm.androidcodeigniterinventory.view.supplier;
+package com.example.mahmudinm.androidcodeigniterinventory.view.supplier.editor;
 
 import com.example.mahmudinm.androidcodeigniterinventory.network.ApiClient;
 import com.example.mahmudinm.androidcodeigniterinventory.network.ApiInterface;

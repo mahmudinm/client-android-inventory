@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    tools:context=".view.supplier.ESupplierActivity">
+    tools:context=".view.supplier.editor.ESupplierActivity">
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"

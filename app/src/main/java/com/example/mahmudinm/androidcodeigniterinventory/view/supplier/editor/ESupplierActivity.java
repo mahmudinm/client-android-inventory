@@ -1,4 +1,4 @@
-package com.example.mahmudinm.androidcodeigniterinventory.view.supplier;
+package com.example.mahmudinm.androidcodeigniterinventory.view.supplier.editor;
 
 import android.app.ProgressDialog;
 import android.content.Intent;

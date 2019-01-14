@@ -23,7 +23,7 @@
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".view.supplier.ESupplierActivity">
+        <activity android:name=".view.supplier.editor.ESupplierActivity">
         </activity>
     </application>
 
