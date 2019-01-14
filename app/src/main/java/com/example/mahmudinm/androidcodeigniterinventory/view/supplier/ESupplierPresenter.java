@@ -6,6 +6,7 @@ import com.example.mahmudinm.androidcodeigniterinventory.network.response.Suppli
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableCompletableObserver;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
@@ -44,6 +45,28 @@ public class ESupplierPresenter {
                                 view.hideProgress();
                             }
                         })
+        );
+    }
+
+    void updateSupplier(String token, String id, String nama, String no_hp, String alamat) {
+        view.showProgress();
+        disposable.add(
+                apiInterface.updateSupplier(token, id, nama, no_hp, alamat)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribeWith(new DisposableCompletableObserver(){
+                                @Override
+                                public void onComplete() {
+                                    view.hideProgress();
+                                    view.statusSuccess("berhasil update");
+                                }
+
+                                @Override
+                                public void onError(Throwable e) {
+                                    view.hideProgress();
+                                    view.statusError(e.getLocalizedMessage());
+                                }
+                            })
         );
     }
 

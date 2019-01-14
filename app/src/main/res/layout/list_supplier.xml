@@ -28,11 +28,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <!--<TextView-->
-        <!--android:id="@+id/nomor"-->
-        <!--android:text="Nomor 1"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"/>-->
-
 
 </LinearLayout>
