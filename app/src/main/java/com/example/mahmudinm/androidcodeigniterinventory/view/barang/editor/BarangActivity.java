@@ -9,9 +9,11 @@ import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.mahmudinm.androidcodeigniterinventory.R;
 import com.example.mahmudinm.androidcodeigniterinventory.utils.SessionManager;
 
@@ -53,10 +55,27 @@ public class BarangActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.select) void selectImage() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent.createChooser(intent, "Select Image"), REQUEST_GALLERY);
+//        permission();
+
+        new MaterialDialog.Builder(this)
+                .title("Select Image")
+                .items(R.array.uploadImages)
+                .itemsIds(R.array.itemIds)
+                .itemsCallback(new MaterialDialog.ListCallback() {
+                    @Override
+                    public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
+                        switch (position) {
+                            case 0:
+                                Intent intent = new Intent();
+                                intent.setType("image/*");
+                                intent.setAction(Intent.ACTION_GET_CONTENT);
+                                startActivityForResult(intent.createChooser(intent, "Select Image"), REQUEST_GALLERY);
+                                break;
+                        }
+                    }
+                })
+                .show();
+
     }
 
     private void permission() {
