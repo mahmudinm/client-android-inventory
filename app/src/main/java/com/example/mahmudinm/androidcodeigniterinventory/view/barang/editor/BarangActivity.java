@@ -2,9 +2,11 @@ package com.example.mahmudinm.androidcodeigniterinventory.view.barang.editor;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -14,6 +16,8 @@ import com.example.mahmudinm.androidcodeigniterinventory.R;
 import com.example.mahmudinm.androidcodeigniterinventory.utils.SessionManager;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class BarangActivity extends AppCompatActivity {
 
@@ -25,6 +29,8 @@ public class BarangActivity extends AppCompatActivity {
     String selectImagePath;
     static final String folder = "AndroidInventory";
     static final int type_foto_code = 1;
+    static final int REQUEST_GALLERY = 1;
+    static final int REQUEST_CAMERA = 2;
 
     @BindView(R.id.kode)
     EditText kode;
@@ -43,6 +49,14 @@ public class BarangActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barang);
+        ButterKnife.bind(this);
+    }
+
+    @OnClick(R.id.select) void selectImage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent.createChooser(intent, "Select Image"), REQUEST_GALLERY);
     }
 
     private void permission() {
@@ -65,6 +79,15 @@ public class BarangActivity extends AppCompatActivity {
             }, 0);
         } else {
 
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_GALLERY && resultCode != 0) {
+            uri = data.getData();
+            gambar.setImageURI(uri);
         }
     }
 }

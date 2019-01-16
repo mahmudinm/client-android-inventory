@@ -10,11 +10,13 @@
     tools:context=".view.barang.editor.BarangActivity">
 
     <ImageView
+        android:id="@+id/gambar"
         android:background="#16000000"
         android:layout_width="match_parent"
         android:layout_height="180dp"/>
 
     <Button
+        android:id="@+id/select"
         android:text="Select Image"
         android:layout_gravity="right"
         android:layout_width="wrap_content"
