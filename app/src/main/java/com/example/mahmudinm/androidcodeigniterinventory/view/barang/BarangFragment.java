@@ -2,6 +2,7 @@ package com.example.mahmudinm.androidcodeigniterinventory.view.barang;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -16,9 +17,11 @@ import android.widget.Toast;
 import com.example.mahmudinm.androidcodeigniterinventory.R;
 import com.example.mahmudinm.androidcodeigniterinventory.network.response.BarangResponse;
 import com.example.mahmudinm.androidcodeigniterinventory.utils.SessionManager;
+import com.example.mahmudinm.androidcodeigniterinventory.view.barang.editor.BarangActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,6 +64,11 @@ public class BarangFragment extends Fragment implements BarangView {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         return x;
+    }
+
+    @OnClick(R.id.fab) void editor() {
+        Intent intent = new Intent(getActivity(), BarangActivity.class);
+        startActivity(intent);
     }
 
     @Override

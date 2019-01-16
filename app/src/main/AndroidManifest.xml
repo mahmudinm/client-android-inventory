@@ -25,6 +25,8 @@
         </activity>
         <activity android:name=".view.supplier.editor.SupplierActivity">
         </activity>
+        <activity android:name=".view.barang.editor.BarangActivity">
+        </activity>
     </application>
 
 </manifest>

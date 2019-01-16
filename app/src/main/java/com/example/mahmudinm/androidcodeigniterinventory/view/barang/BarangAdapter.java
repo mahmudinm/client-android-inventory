@@ -43,7 +43,7 @@ public class BarangAdapter extends RecyclerView.Adapter<BarangAdapter.ViewHolder
         viewHolder.stock.setText(barang.getStock());
         viewHolder.ukuran.setText(barang.getUkuran());
 
-        String url = "https://9b1c432f.ngrok.io/android_codeigniter_inventory/upload/";
+        String url = "https://ceaaa95b.ngrok.io/android_codeigniter_inventory/upload/";
 
         Glide.with(mContext).load(url + barang.getGambar())
                 .thumbnail(0.5f)
