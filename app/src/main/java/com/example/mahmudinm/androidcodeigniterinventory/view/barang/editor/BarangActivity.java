@@ -145,6 +145,43 @@ public class BarangActivity extends AppCompatActivity implements BarangView {
         );
     }
 
+    @OnClick(R.id.update) void update() {
+        MultipartBody.Part gambarPart = null;
+        // Cek jika ada file gambar yang telah di set atau tidak
+        if (uri == null) {
+            RequestBody file = RequestBody.create(MultipartBody.FORM,"");
+            gambarPart = MultipartBody.Part.createFormData("gambar", "", file);
+        } else {
+            File file = FileUtils.getFile(BarangActivity.this, uri);
+            RequestBody gambarBody = RequestBody.create(MediaType.parse("image/*"), file);
+            gambarPart = MultipartBody.Part.createFormData("gambar", file.getName
+                    (), gambarBody);
+        }
+        
+        RequestBody kodeBody = RequestBody.create(MediaType.parse("text/plain"), et_kode.getText()
+                .toString());
+        RequestBody namaBody = RequestBody.create(MediaType.parse("text/plain"), et_nama.getText()
+                .toString());
+        RequestBody stockBody = RequestBody.create(MediaType.parse("text/plain"), et_stock.getText()
+                .toString());
+        RequestBody hargaBody = RequestBody.create(MediaType.parse("text/plain"), et_harga.getText()
+                .toString());
+        RequestBody ukuranBody = RequestBody.create(MediaType.parse("text/plain"), et_ukuran.getText()
+                .toString());
+
+        presenter.updateBarang(
+                session.getKeyToken(),
+                id,
+                gambarPart,
+                kodeBody,
+                namaBody,
+                stockBody,
+                hargaBody,
+                ukuranBody
+        );
+
+    }
+
     @Override
     public void statusSuccess(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();

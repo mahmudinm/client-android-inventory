@@ -6,6 +6,7 @@ import com.example.mahmudinm.androidcodeigniterinventory.network.response.Barang
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableCompletableObserver;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MultipartBody;
@@ -46,6 +47,28 @@ public class BarangPresenter {
                         view.hideProgress();
                     }
                 })
+        );
+    }
+
+    void updateBarang(String token, String id, MultipartBody.Part gambar, RequestBody kode,
+                      RequestBody nama, RequestBody stock, RequestBody harga, RequestBody ukuran) {
+        view.showProgress();
+        disposable.add(
+                apiInterface.updateBarang(token, id, gambar, kode, nama, stock, harga, ukuran)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeWith(new DisposableCompletableObserver(){
+                        @Override
+                        public void onComplete() {
+                            view.hideProgress();
+                            view.statusSuccess("berhasil update");
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            view.statusError(e.getLocalizedMessage());
+                        }
+                    })
         );
     }
 }
