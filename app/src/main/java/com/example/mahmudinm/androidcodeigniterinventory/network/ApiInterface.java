@@ -32,17 +32,17 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("supplier")
     Observable<SupplierResponse> saveSupplier(@Header("Authorization") String token,
-                                               @Field("nama") String nama,
-                                               @Field("no_hp") String no_hp,
-                                               @Field("alamat") String alamat);
+                                              @Field("nama") String nama,
+                                              @Field("no_hp") String no_hp,
+                                              @Field("alamat") String alamat);
 
     @FormUrlEncoded
     @POST("supplier/update/{id}")
     Completable updateSupplier(@Header("Authorization") String token,
-                             @Path("id") String id,
-                             @Field("nama") String nama,
-                             @Field("no_hp") String no_hp,
-                             @Field("alamat") String alamat);
+                               @Path("id") String id,
+                               @Field("nama") String nama,
+                               @Field("no_hp") String no_hp,
+                               @Field("alamat") String alamat);
 
     @POST("supplier/delete/{id}")
     Completable deleteSupplier(@Header("Authorization") String token,
@@ -61,5 +61,18 @@ public interface ApiInterface {
                                           @Part("stock") RequestBody stock,
                                           @Part("harga") RequestBody harga,
                                           @Part("ukuran") RequestBody ukuran);
+    @Multipart
+    @POST("barang/update/{id}")
+    Completable updateBarang(@Header("Authorization") String token,
+                             @Path("id") String id,
+                             @Part MultipartBody.Part gambar,
+                             @Part("kode") RequestBody kode,
+                             @Part("nama") RequestBody nama,
+                             @Part("stock") RequestBody stock,
+                             @Part("harga") RequestBody harga,
+                             @Part("ukuran") RequestBody ukuran);
 
+    @POST("barang/delete/{id}")
+    Completable deleteBarang(@Header("Authorization") String token,
+                             @Path("id") String id);
 }
