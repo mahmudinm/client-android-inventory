@@ -1,7 +1,9 @@
 package com.example.mahmudinm.androidcodeigniterinventory.view.barang.editor;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,10 +11,20 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.mahmudinm.androidcodeigniterinventory.R;
+import com.example.mahmudinm.androidcodeigniterinventory.utils.SessionManager;
 
 import butterknife.BindView;
 
 public class BarangActivity extends AppCompatActivity {
+
+    SessionManager session;
+    ProgressDialog progressDialog;
+    Uri uri;
+
+    String currentPhotoPath;
+    String selectImagePath;
+    static final String folder = "AndroidInventory";
+    static final int type_foto_code = 1;
 
     @BindView(R.id.kode)
     EditText kode;
