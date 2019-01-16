@@ -73,6 +73,7 @@ public class BarangActivity extends AppCompatActivity implements BarangView {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading ...");
 
+        session = new SessionManager(this);
         presenter = new BarangPresenter(this);
 
     }
@@ -106,31 +107,53 @@ public class BarangActivity extends AppCompatActivity implements BarangView {
     }
 
     @OnClick(R.id.simpan) void simpan() {
-//        File file = FileUtils.getFile(BarangActivity.this, uri);
-//        RequestBody gambarBody = RequestBody.create(MediaType.parse("image/*"), file);
-//        MultipartBody.Part gambarPart = MultipartBody.Part.createFormData("gambar", file.getName
-//                (), gambarBody);
+        File file = FileUtils.getFile(BarangActivity.this, uri);
+        RequestBody gambarBody = RequestBody.create(MediaType.parse("image/*"), file);
+        MultipartBody.Part gambarPart = MultipartBody.Part.createFormData("gambar", file.getName
+                (), gambarBody);
+        RequestBody kodeBody = RequestBody.create(MediaType.parse("text/plain"), kode.getText()
+                .toString());
+        RequestBody namaBody = RequestBody.create(MediaType.parse("text/plain"), nama.getText()
+                .toString());
+        RequestBody stockBody = RequestBody.create(MediaType.parse("text/plain"), stock.getText()
+                .toString());
+        RequestBody hargaBody = RequestBody.create(MediaType.parse("text/plain"), harga.getText()
+                .toString());
+        RequestBody ukuranBody = RequestBody.create(MediaType.parse("text/plain"), ukuran.getText()
+                .toString());
+
+        presenter.saveBarang(
+                session.getKeyToken(),
+                gambarPart,
+                kodeBody,
+                namaBody,
+                stockBody,
+                hargaBody,
+                ukuranBody
+        );
 
     }
 
     @Override
-    public void statusSuccess(BarangResponse barangResponse) {
-
+    public void statusSuccess(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        setResult(RESULT_OK);
+        finish();
     }
 
     @Override
     public void statusError(String message) {
-
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showProgress() {
-
+        progressDialog.show();
     }
 
     @Override
     public void hideProgress() {
-
+        progressDialog.dismiss();
     }
 
     @Override

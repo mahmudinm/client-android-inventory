@@ -33,7 +33,7 @@ public class BarangPresenter {
                 .subscribeWith(new DisposableObserver<BarangResponse>() {
                     @Override
                     public void onNext(BarangResponse barangResponse) {
-                        view.statusSuccess(barangResponse);
+                        view.statusSuccess(barangResponse.getStatus());
                     }
 
                     @Override

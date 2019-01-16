@@ -4,7 +4,7 @@ import com.example.mahmudinm.androidcodeigniterinventory.network.response.Barang
 
 public interface BarangView {
 
-    void statusSuccess(BarangResponse barangResponse);
+    void statusSuccess(String message);
     void statusError(String message);
     void showProgress();
     void hideProgress();
