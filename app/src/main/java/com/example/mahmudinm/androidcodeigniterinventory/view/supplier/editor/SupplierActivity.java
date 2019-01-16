@@ -52,13 +52,8 @@ public class SupplierActivity extends AppCompatActivity implements SupplierView 
         progressDialog.setMessage("Loading ...");
         presenter = new SupplierPresenter(this);
 
-        Intent intent= getIntent();
-        id = intent.getStringExtra("id");
-        nama = intent.getStringExtra("nama");
-        no_hp = intent.getStringExtra("no_hp");
-        alamat = intent.getStringExtra("alamat");
-
         initDataIntent();
+        setTextEditor();
     }
 
     @OnClick(R.id.simpan) void simpan(){
@@ -111,6 +106,14 @@ public class SupplierActivity extends AppCompatActivity implements SupplierView 
     }
 
     private void initDataIntent() {
+        Intent intent= getIntent();
+        id = intent.getStringExtra("id");
+        nama = intent.getStringExtra("nama");
+        no_hp = intent.getStringExtra("no_hp");
+        alamat = intent.getStringExtra("alamat");
+    }
+
+    private void setTextEditor() {
         if (id != null) {
             getSupportActionBar().setTitle("Update data");
             txtNama.setText(nama);

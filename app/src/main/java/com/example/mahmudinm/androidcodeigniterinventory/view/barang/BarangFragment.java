@@ -15,7 +15,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.mahmudinm.androidcodeigniterinventory.R;
+import com.example.mahmudinm.androidcodeigniterinventory.model.Barang;
 import com.example.mahmudinm.androidcodeigniterinventory.network.response.BarangResponse;
+import com.example.mahmudinm.androidcodeigniterinventory.utils.RecyclerItemClickListener;
 import com.example.mahmudinm.androidcodeigniterinventory.utils.SessionManager;
 import com.example.mahmudinm.androidcodeigniterinventory.view.barang.editor.BarangActivity;
 
@@ -90,6 +92,25 @@ public class BarangFragment extends Fragment implements BarangView {
     public void statusSuccess(BarangResponse barangResponse) {
         adapter = new BarangAdapter(barangResponse.getData(), getActivity());
         recyclerView.setAdapter(adapter);
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(),
+                new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Barang barang = adapter.getBarang(position);
+
+                        Intent intent = new Intent(getActivity(), BarangActivity.class);
+
+                        intent.putExtra("id", barang.getId());
+                        intent.putExtra("kode", barang.getKode());
+                        intent.putExtra("nama", barang.getNama());
+                        intent.putExtra("stock", barang.getStock());
+                        intent.putExtra("harga", barang.getHarga());
+                        intent.putExtra("ukuran", barang.getUkuran());
+                        intent.putExtra("gambar", barang.getGambar());
+
+                        startActivityForResult(intent, REQUEST_UPDATE);
+                    }
+                }));
         adapter.notifyDataSetChanged();
     }
 

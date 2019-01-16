@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.mahmudinm.androidcodeigniterinventory.R;
 import com.example.mahmudinm.androidcodeigniterinventory.model.Barang;
+import com.example.mahmudinm.androidcodeigniterinventory.utils.Const;
 
 import java.util.List;
 
@@ -43,9 +44,9 @@ public class BarangAdapter extends RecyclerView.Adapter<BarangAdapter.ViewHolder
         viewHolder.stock.setText(barang.getStock());
         viewHolder.ukuran.setText(barang.getUkuran());
 
-        String url = "https://ceaaa95b.ngrok.io/android_codeigniter_inventory/upload/";
+        String URL = Const.URL + "upload/";
 
-        Glide.with(mContext).load(url + barang.getGambar())
+        Glide.with(mContext).load(URL + barang.getGambar())
                 .thumbnail(0.5f)
                 .transition(new DrawableTransitionOptions().crossFade())
                 .into(viewHolder.gambar);
@@ -55,6 +56,10 @@ public class BarangAdapter extends RecyclerView.Adapter<BarangAdapter.ViewHolder
     @Override
     public int getItemCount() {
         return barangs.size();
+    }
+
+    public Barang getBarang(int position) {
+        return barangs.get(position);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

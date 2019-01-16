@@ -16,12 +16,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.mahmudinm.androidcodeigniterinventory.BuildConfig;
 import com.example.mahmudinm.androidcodeigniterinventory.R;
 import com.example.mahmudinm.androidcodeigniterinventory.network.response.BarangResponse;
+import com.example.mahmudinm.androidcodeigniterinventory.utils.Const;
 import com.example.mahmudinm.androidcodeigniterinventory.utils.FileUtils;
 import com.example.mahmudinm.androidcodeigniterinventory.utils.SessionManager;
 
@@ -44,6 +48,7 @@ public class BarangActivity extends AppCompatActivity implements BarangView {
     BarangPresenter presenter;
     Uri uri;
 
+    String id, kode, nama, stock, harga, ukuran, gambar;
     String currentPhotoPath;
     String selectImagePath;
     static final String folder = "AndroidInventory";
@@ -52,17 +57,21 @@ public class BarangActivity extends AppCompatActivity implements BarangView {
     static final int REQUEST_CAMERA = 2;
 
     @BindView(R.id.kode)
-    EditText kode;
+    EditText et_kode;
     @BindView(R.id.nama)
-    EditText nama;
+    EditText et_nama;
     @BindView(R.id.stock)
-    EditText stock;
+    EditText et_stock;
     @BindView(R.id.harga)
-    EditText harga;
+    EditText et_harga;
     @BindView(R.id.ukuran)
-    EditText ukuran;
+    EditText et_ukuran;
     @BindView(R.id.gambar)
-    ImageView gambar;
+    ImageView iv_gambar;
+    @BindView(R.id.content_simpan)
+    LinearLayout content_simpan;
+    @BindView(R.id.content_update)
+    LinearLayout content_update;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +84,9 @@ public class BarangActivity extends AppCompatActivity implements BarangView {
 
         session = new SessionManager(this);
         presenter = new BarangPresenter(this);
+
+        initDataIntent();
+        setTextEditor();
 
     }
 
@@ -111,15 +123,15 @@ public class BarangActivity extends AppCompatActivity implements BarangView {
         RequestBody gambarBody = RequestBody.create(MediaType.parse("image/*"), file);
         MultipartBody.Part gambarPart = MultipartBody.Part.createFormData("gambar", file.getName
                 (), gambarBody);
-        RequestBody kodeBody = RequestBody.create(MediaType.parse("text/plain"), kode.getText()
+        RequestBody kodeBody = RequestBody.create(MediaType.parse("text/plain"), et_kode.getText()
                 .toString());
-        RequestBody namaBody = RequestBody.create(MediaType.parse("text/plain"), nama.getText()
+        RequestBody namaBody = RequestBody.create(MediaType.parse("text/plain"), et_nama.getText()
                 .toString());
-        RequestBody stockBody = RequestBody.create(MediaType.parse("text/plain"), stock.getText()
+        RequestBody stockBody = RequestBody.create(MediaType.parse("text/plain"), et_stock.getText()
                 .toString());
-        RequestBody hargaBody = RequestBody.create(MediaType.parse("text/plain"), harga.getText()
+        RequestBody hargaBody = RequestBody.create(MediaType.parse("text/plain"), et_harga.getText()
                 .toString());
-        RequestBody ukuranBody = RequestBody.create(MediaType.parse("text/plain"), ukuran.getText()
+        RequestBody ukuranBody = RequestBody.create(MediaType.parse("text/plain"), et_ukuran.getText()
                 .toString());
 
         presenter.saveBarang(
@@ -131,7 +143,6 @@ public class BarangActivity extends AppCompatActivity implements BarangView {
                 hargaBody,
                 ukuranBody
         );
-
     }
 
     @Override
@@ -161,11 +172,45 @@ public class BarangActivity extends AppCompatActivity implements BarangView {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_GALLERY && resultCode != 0) {
             uri = data.getData();
-            gambar.setImageURI(uri);
+            iv_gambar.setImageURI(uri);
         } else if (requestCode == REQUEST_CAMERA && resultCode != 0) {
             uri = Uri.parse(currentPhotoPath);
             selectImagePath = uri.getPath();
-            gambar.setImageURI(uri);
+            iv_gambar.setImageURI(uri);
+        }
+    }
+
+    private void initDataIntent() {
+        Intent intent= getIntent();
+        id = intent.getStringExtra("id");
+        kode = intent.getStringExtra("kode");
+        nama = intent.getStringExtra("nama");
+        stock = intent.getStringExtra("stock");
+        harga = intent.getStringExtra("harga");
+        ukuran = intent.getStringExtra("ukuran");
+        gambar = intent.getStringExtra("gambar");
+    }
+
+    private void setTextEditor() {
+        if (id != null) {
+            getSupportActionBar().setTitle("Update data");
+            et_nama.setText(nama);
+            et_kode.setText(kode);
+            et_stock.setText(stock);
+            et_harga.setText(harga);
+            et_ukuran.setText(ukuran);
+
+            String URL = Const.URL + "upload/";
+
+            Glide.with(this).load(URL+ gambar)
+                    .thumbnail(0.5f)
+                    .transition(new DrawableTransitionOptions().crossFade())
+                    .into(iv_gambar);
+
+            content_update.setVisibility(View.VISIBLE);
+            content_simpan.setVisibility(View.GONE);
+        } else {
+            getSupportActionBar().setTitle("Simpan data");
         }
     }
 
