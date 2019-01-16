@@ -55,7 +55,7 @@ public class BarangActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.select) void selectImage() {
-//        permission();
+        permission();
 
         new MaterialDialog.Builder(this)
                 .title("Select Image")
@@ -109,4 +109,6 @@ public class BarangActivity extends AppCompatActivity {
             gambar.setImageURI(uri);
         }
     }
+
+
 }
