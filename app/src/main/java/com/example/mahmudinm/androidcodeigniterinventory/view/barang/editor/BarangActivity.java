@@ -182,6 +182,13 @@ public class BarangActivity extends AppCompatActivity implements BarangView {
 
     }
 
+    @OnClick(R.id.hapus) void hapus() {
+        presenter.deleteBarang(
+                session.getKeyToken(),
+                id
+        );
+    }
+
     @Override
     public void statusSuccess(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
@@ -239,7 +246,7 @@ public class BarangActivity extends AppCompatActivity implements BarangView {
 
             String URL = Const.URL + "upload/";
 
-            Glide.with(this).load(URL+ gambar)
+            Glide.with(this).load(URL + gambar)
                     .thumbnail(0.5f)
                     .transition(new DrawableTransitionOptions().crossFade())
                     .into(iv_gambar);

@@ -71,4 +71,25 @@ public class BarangPresenter {
                     })
         );
     }
+
+    void deleteBarang(String token, String id) {
+        view.showProgress();
+        disposable.add(
+                apiInterface.deleteBarang(token, id)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeWith(new DisposableCompletableObserver(){
+                            @Override
+                            public void onComplete() {
+                                view.hideProgress();
+                                view.statusSuccess("berhasil update");
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                view.statusError(e.getLocalizedMessage());
+                            }
+                        })
+        );
+    }
 }
