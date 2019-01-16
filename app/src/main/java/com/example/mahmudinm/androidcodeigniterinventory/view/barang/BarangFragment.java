@@ -23,6 +23,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -94,5 +96,15 @@ public class BarangFragment extends Fragment implements BarangView {
     @Override
     public void statusError(String message) {
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_ADD && resultCode == RESULT_OK) {
+            presenter.getBarang(session.getKeyToken());
+        } else if (requestCode == REQUEST_UPDATE && resultCode == RESULT_OK) {
+            presenter.getBarang(session.getKeyToken());
+        }
     }
 }
