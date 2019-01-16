@@ -1,10 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".view.barang.editor.BarangActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:background="#16000000"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"/>
+
+    <Button
+        android:text="Select Image"
+        android:layout_gravity="right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/kode"
+            android:hint="Kode Barang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/nama"
+            android:hint="Nama Barang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/stock"
+            android:hint="Stock Barang"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/harga"
+            android:hint="Harga Barang"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/ukuran"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ukuran"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <LinearLayout
+        android:id="@+id/content_simpan"
+        android:gravity="center|bottom"
+        android:layout_weight="1"
+        android:weightSum="1.0"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_marginBottom="10dp">
+
+        <Button
+            android:id="@+id/simpan"
+            android:text="Simpan"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_width="0dip" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/content_update"
+        android:visibility="gone"
+        android:gravity="center|bottom"
+        android:layout_weight="1"
+        android:weightSum="1.0"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_marginBottom="10dp">
+
+        <Button
+            android:id="@+id/hapus"
+            android:text="Hapus"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3"
+            android:layout_width="0dip" />
+
+        <Button
+            android:id="@+id/update"
+            android:text="Update"
+            android:layout_height="wrap_content"
+            android:layout_weight=".7"
+            android:layout_width="0dip" />
+
+    </LinearLayout>
+
+</LinearLayout>

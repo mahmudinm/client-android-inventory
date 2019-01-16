@@ -33,6 +33,9 @@ public class BarangFragment extends Fragment implements BarangView {
     BarangAdapter adapter;
     ProgressDialog progressDialog;
 
+    private static final int REQUEST_ADD = 1;
+    private static final int REQUEST_UPDATE = 2;
+
     @BindView(R.id.recycler)
     RecyclerView recyclerView;
 
@@ -68,7 +71,7 @@ public class BarangFragment extends Fragment implements BarangView {
 
     @OnClick(R.id.fab) void editor() {
         Intent intent = new Intent(getActivity(), BarangActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, REQUEST_ADD);
     }
 
     @Override
