@@ -6,11 +6,15 @@ import com.example.mahmudinm.androidcodeigniterinventory.network.response.Suppli
 
 import io.reactivex.Completable;
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface ApiInterface {
@@ -40,7 +44,6 @@ public interface ApiInterface {
                              @Field("no_hp") String no_hp,
                              @Field("alamat") String alamat);
 
-//    @FormUrlEncoded
     @POST("supplier/delete/{id}")
     Completable deleteSupplier(@Header("Authorization") String token,
                                @Path("id") String id);
@@ -49,6 +52,14 @@ public interface ApiInterface {
     @GET("barang")
     Observable<BarangResponse> getBarang(@Header("Authorization") String token);
 
-
+    @Multipart
+    @POST("barang")
+    Observable<BarangResponse> saveBarang(@Header("Authorization") String token,
+                                          @Part MultipartBody.Part gambar,
+                                          @Part("kode") RequestBody kode,
+                                          @Part("nama") RequestBody nama,
+                                          @Part("stock") RequestBody stock,
+                                          @Part("harga") RequestBody harga,
+                                          @Part("ukuran") RequestBody ukuran);
 
 }

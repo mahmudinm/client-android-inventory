@@ -21,6 +21,8 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.mahmudinm.androidcodeigniterinventory.BuildConfig;
 import com.example.mahmudinm.androidcodeigniterinventory.R;
+import com.example.mahmudinm.androidcodeigniterinventory.network.response.BarangResponse;
+import com.example.mahmudinm.androidcodeigniterinventory.utils.FileUtils;
 import com.example.mahmudinm.androidcodeigniterinventory.utils.SessionManager;
 
 import java.io.File;
@@ -31,11 +33,15 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
-public class BarangActivity extends AppCompatActivity {
+public class BarangActivity extends AppCompatActivity implements BarangView {
 
     SessionManager session;
     ProgressDialog progressDialog;
+    BarangPresenter presenter;
     Uri uri;
 
     String currentPhotoPath;
@@ -63,6 +69,12 @@ public class BarangActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barang);
         ButterKnife.bind(this);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading ...");
+
+        presenter = new BarangPresenter(this);
+
     }
 
     @OnClick(R.id.select) void selectImage() {
@@ -91,9 +103,35 @@ public class BarangActivity extends AppCompatActivity {
                     }
                 })
                 .show();
+    }
+
+    @OnClick(R.id.simpan) void simpan() {
+//        File file = FileUtils.getFile(BarangActivity.this, uri);
+//        RequestBody gambarBody = RequestBody.create(MediaType.parse("image/*"), file);
+//        MultipartBody.Part gambarPart = MultipartBody.Part.createFormData("gambar", file.getName
+//                (), gambarBody);
 
     }
 
+    @Override
+    public void statusSuccess(BarangResponse barangResponse) {
+
+    }
+
+    @Override
+    public void statusError(String message) {
+
+    }
+
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
