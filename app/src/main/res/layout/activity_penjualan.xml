@@ -13,8 +13,7 @@
         android:text="Pilih Barang :"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"/>
+        android:layout_marginTop="10dp"/>
 
     <Spinner
         android:id="@+id/nama"
@@ -26,8 +25,21 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/stock"
+            android:id="@+id/jumlah_barang"
             android:hint="Jumlah Barang"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/jumlah_harga"
+            android:hint="Jumlah Harga"
             android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

@@ -5,9 +5,13 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mahmudinm.androidcodeigniterinventory.R;
@@ -20,6 +24,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.OnItemSelected;
+import butterknife.OnTextChanged;
 
 public class PenjualanActivity extends AppCompatActivity implements PenjualanView{
 
@@ -28,10 +35,14 @@ public class PenjualanActivity extends AppCompatActivity implements PenjualanVie
     SessionManager session;
     Context mContext;
 
-    String jumlah_harga;
+    String barang_id, nama, harga, jumlah_harga, jumlah_barang;
 
     @BindView(R.id.nama)
-    Spinner nama;
+    Spinner s_nama;
+    @BindView(R.id.jumlah_barang)
+    EditText et_jumlah_barang;
+    @BindView(R.id.jumlah_harga)
+    EditText et_jumlah_harga;
     @BindView(R.id.content_simpan)
     LinearLayout content_simpan;
     @BindView(R.id.content_update)
@@ -51,7 +62,38 @@ public class PenjualanActivity extends AppCompatActivity implements PenjualanVie
         presenter = new PenjualanPresenter(this);
 
         presenter.getListBarang(session.getKeyToken());
+
+        s_nama.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                nama = ((TextView) view.findViewById(R.id.nama)).getText().toString();
+                harga = ((TextView) view.findViewById(R.id.harga)).getText().toString();
+                barang_id = ((TextView) view.findViewById(R.id.barang_id)).getText().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
     }
+
+    @OnTextChanged(R.id.jumlah_barang) void change_jumlah_barang() {
+        String s_jumlah_barang;
+        if (et_jumlah_barang.getText().toString().isEmpty()) {
+            s_jumlah_barang = "1" ;
+        } else {
+            s_jumlah_barang = et_jumlah_barang.getText().toString();
+        }
+        int total = Integer.parseInt(s_jumlah_barang) * Integer.parseInt(harga);
+        et_jumlah_harga.setText(String.valueOf(total));
+    }
+
+    @OnClick(R.id.simpan) void simpan() {
+        Toast.makeText(this, nama + harga + barang_id, Toast.LENGTH_SHORT).show();
+    }
+
 
     @Override
     public void showProgress() {
@@ -77,15 +119,20 @@ public class PenjualanActivity extends AppCompatActivity implements PenjualanVie
 
     @Override
     public void setListBarang(BarangResponse barangResponse) {
-        List<Barang> barangs = barangResponse.getData();
-        List<String> listSpinner  = new ArrayList<String>();
-        for (int i = 0; i < barangs.size(); i++) {
-            listSpinner.add(barangs.get(i).getNama());
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),
-                android.R.layout.simple_spinner_item, listSpinner);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        nama.setAdapter(adapter);
+//        List<Barang> barangs = barangResponse.getData();
+//        List<String> listSpinner  = new ArrayList<String>();
+//        for (int i = 0; i < barangs.size(); i++) {
+//            listSpinner.add(barangs.get(i).getNama());
+//        }
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),
+//                android.R.layout.simple_spinner_item, listSpinner);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        s_nama.setAdapter(adapter);
 
+        SpinnerBarangAdapter adapter = new SpinnerBarangAdapter(this, R.layout.spinner_barang,
+                barangResponse.getData());
+        s_nama.setAdapter(adapter);
     }
+
+
 }
