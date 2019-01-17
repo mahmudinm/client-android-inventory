@@ -82,9 +82,6 @@ public class PenjualanActivity extends AppCompatActivity implements PenjualanVie
         for (int i = 0; i < barangs.size(); i++) {
             listSpinner.add(barangs.get(i).getNama());
         }
-//        Log.d("setbarang", "setListBarang: " + listSpinnners);
-
-
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),
                 android.R.layout.simple_spinner_item, listSpinner);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
