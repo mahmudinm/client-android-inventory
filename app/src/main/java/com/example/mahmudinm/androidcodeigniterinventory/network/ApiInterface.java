@@ -89,4 +89,24 @@ public interface ApiInterface {
     @GET("penjualan")
     Observable<PenjualanResponse> getPenjualan(@Header("Authorization") String token);
 
+
+    @FormUrlEncoded
+    @POST("penjualan")
+    Observable<PenjualanResponse> savePenjualan(@Header("Authorization") String token,
+                                                @Field("barang_id") String barang_id,
+                                                @Field("jumlah_barang") String jumlah_barang,
+                                                @Field("jumlah_harga") String jumlah_harga);
+
+    @FormUrlEncoded
+    @POST("penjualan/update/{id}")
+    Completable updatePenjualan(@Header("Authorization") String token,
+                                @Path("id") String id,
+                                @Field("barang_id") String barang_id,
+                                @Field("jumlah_barang") String jumlah_barang,
+                                @Field("jumlah_harga") String jumlah_harga);
+
+    @POST("penjualan/delete/{id}")
+    Completable deletePenjualan(@Header("Authorization") String token,
+                                @Path("id") String id);
+
 }

@@ -80,12 +80,14 @@ public class PenjualanActivity extends AppCompatActivity implements PenjualanVie
     }
 
     @OnTextChanged(R.id.jumlah_barang) void change_jumlah_barang() {
+        // Cek jika value nya di kosongkan
         String s_jumlah_barang;
         if (et_jumlah_barang.getText().toString().isEmpty()) {
             s_jumlah_barang = "1" ;
         } else {
             s_jumlah_barang = et_jumlah_barang.getText().toString();
         }
+
         int total = Integer.parseInt(s_jumlah_barang) * Integer.parseInt(harga);
         et_jumlah_harga.setText(String.valueOf(total));
     }
@@ -119,16 +121,6 @@ public class PenjualanActivity extends AppCompatActivity implements PenjualanVie
 
     @Override
     public void setListBarang(BarangResponse barangResponse) {
-//        List<Barang> barangs = barangResponse.getData();
-//        List<String> listSpinner  = new ArrayList<String>();
-//        for (int i = 0; i < barangs.size(); i++) {
-//            listSpinner.add(barangs.get(i).getNama());
-//        }
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),
-//                android.R.layout.simple_spinner_item, listSpinner);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        s_nama.setAdapter(adapter);
-
         SpinnerBarangAdapter adapter = new SpinnerBarangAdapter(this, R.layout.spinner_barang,
                 barangResponse.getData());
         s_nama.setAdapter(adapter);
