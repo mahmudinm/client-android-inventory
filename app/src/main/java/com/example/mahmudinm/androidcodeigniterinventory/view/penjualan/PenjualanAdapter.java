@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 public class PenjualanAdapter extends RecyclerView.Adapter<PenjualanAdapter.ViewHolder> {
 
-    
+
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         public ViewHolder(@NonNull View itemView) {

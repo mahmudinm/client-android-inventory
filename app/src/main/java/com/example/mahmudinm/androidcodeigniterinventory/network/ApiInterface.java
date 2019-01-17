@@ -2,6 +2,7 @@ package com.example.mahmudinm.androidcodeigniterinventory.network;
 
 import com.example.mahmudinm.androidcodeigniterinventory.network.response.AuthResponse;
 import com.example.mahmudinm.androidcodeigniterinventory.network.response.BarangResponse;
+import com.example.mahmudinm.androidcodeigniterinventory.network.response.PenjualanResponse;
 import com.example.mahmudinm.androidcodeigniterinventory.network.response.SupplierResponse;
 
 import io.reactivex.Completable;
@@ -75,4 +76,9 @@ public interface ApiInterface {
     @POST("barang/delete/{id}")
     Completable deleteBarang(@Header("Authorization") String token,
                              @Path("id") String id);
+
+//Penjualan CRUD
+    @GET("penjualan")
+    Observable<PenjualanResponse> getPenjualan(@Header("Authorization") String token);
+
 }
