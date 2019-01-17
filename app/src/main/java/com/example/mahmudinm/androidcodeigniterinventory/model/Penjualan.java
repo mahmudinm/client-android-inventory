@@ -10,7 +10,7 @@ public class Penjualan {
     @Expose
     @SerializedName("barang_id") String barang_id;
     @Expose
-    @SerializedName("jumlah_stock") String jumlah_stock;
+    @SerializedName("jumlah_barang") String jumlah_barang;
     @Expose
     @SerializedName("jumlah_harga") String jumlah_harga;
     @Expose
@@ -36,12 +36,12 @@ public class Penjualan {
         this.barang_id = barang_id;
     }
 
-    public String getJumlah_stock() {
-        return jumlah_stock;
+    public String getJumlah_barang() {
+        return jumlah_barang;
     }
 
-    public void setJumlah_stock(String jumlah_stock) {
-        this.jumlah_stock = jumlah_stock;
+    public void setJumlah_barang(String jumlah_barang) {
+        this.jumlah_barang = jumlah_barang;
     }
 
     public String getJumlah_harga() {
