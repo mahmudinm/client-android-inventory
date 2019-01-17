@@ -58,8 +58,8 @@ public interface ApiInterface {
     Observable<BarangResponse> getBarang(@Header("Authorization") String token);
 
     @GET("barang/list")
-    Call<BarangResponse> getBarangList(@Header("Authorization") String token);
-//    Observable<BarangResponse> getBarangList(@Header("Authorization") String token);
+//    Call<BarangResponse> getBarangList(@Header("Authorization") String token);
+    Observable<BarangResponse> getBarangList(@Header("Authorization") String token);
 
     @Multipart
     @POST("barang")

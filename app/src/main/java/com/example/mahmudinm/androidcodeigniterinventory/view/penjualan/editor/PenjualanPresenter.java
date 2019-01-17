@@ -26,42 +26,28 @@ public class PenjualanPresenter {
 
     void getListBarang(String token) {
         view.showProgress();
-        Call<BarangResponse> getBarangList = apiInterface.getBarangList(token);
-        getBarangList.enqueue(new Callback<BarangResponse>() {
-            @Override
-            public void onResponse(Call<BarangResponse> call, Response<BarangResponse> response) {
-                view.setListBarang(response.body());
-                view.hideProgress();
-            }
+        disposable.add(
+            apiInterface.getBarangList(token)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeWith(new DisposableObserver<BarangResponse>(){
+                        @Override
+                        public void onNext(BarangResponse barangResponse) {
+                            view.setListBarang(barangResponse);
+                        }
 
-            @Override
-            public void onFailure(Call<BarangResponse> call, Throwable t) {
-                view.statusError(t.getLocalizedMessage());
-                view.hideProgress();
-            }
-        });
-//        disposable.add(
-//            apiInterface.getBarangList(token)
-//                    .subscribeOn(Schedulers.io())
-//                    .observeOn(AndroidSchedulers.mainThread())
-//                    .subscribeWith(new DisposableObserver<BarangResponse>(){
-//                        @Override
-//                        public void onNext(BarangResponse barangResponse) {
-//                            view.setListBarang(barangResponse);
-//                        }
-//
-//                        @Override
-//                        public void onError(Throwable e) {
-//                            view.hideProgress();
-//                            view.statusError(e.getLocalizedMessage());
-//                        }
-//
-//                        @Override
-//                        public void onComplete() {
-//                            view.hideProgress();
-//                        }
-//                    })
-//        );
+                        @Override
+                        public void onError(Throwable e) {
+                            view.hideProgress();
+                            view.statusError(e.getLocalizedMessage());
+                        }
+
+                        @Override
+                        public void onComplete() {
+                            view.hideProgress();
+                        }
+                    })
+        );
     }
 
 }

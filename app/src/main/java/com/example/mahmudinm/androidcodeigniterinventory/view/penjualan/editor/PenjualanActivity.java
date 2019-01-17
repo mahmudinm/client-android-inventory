@@ -78,16 +78,17 @@ public class PenjualanActivity extends AppCompatActivity implements PenjualanVie
     @Override
     public void setListBarang(BarangResponse barangResponse) {
         List<Barang> barangs = barangResponse.getData();
-        List<String> listSpinnners  = new ArrayList<String>();
+        List<String> listSpinner  = new ArrayList<String>();
         for (int i = 0; i < barangs.size(); i++) {
-            listSpinnners.add(barangs.get(i).getNama());
+            listSpinner.add(barangs.get(i).getNama());
         }
 //        Log.d("setbarang", "setListBarang: " + listSpinnners);
 
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext, android.R.layout
-                .simple_spinner_dropdown_item, listSpinnners);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),
+                android.R.layout.simple_spinner_item, listSpinner);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         nama.setAdapter(adapter);
+
     }
 }
