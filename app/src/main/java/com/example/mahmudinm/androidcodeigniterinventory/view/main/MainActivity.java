@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import com.example.mahmudinm.androidcodeigniterinventory.R;
 import com.example.mahmudinm.androidcodeigniterinventory.utils.SessionManager;
 import com.example.mahmudinm.androidcodeigniterinventory.view.barang.BarangFragment;
+import com.example.mahmudinm.androidcodeigniterinventory.view.penjualan.PenjualanFragment;
 import com.example.mahmudinm.androidcodeigniterinventory.view.supplier.SupplierFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -60,7 +61,10 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_penjualan) {
-            // Handle the camera action
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.mainFrame, new PenjualanFragment())
+                    .commit();
         } else if (id == R.id.nav_barang) {
             getSupportFragmentManager()
                     .beginTransaction()
