@@ -20,9 +20,11 @@ import com.example.mahmudinm.androidcodeigniterinventory.utils.RecyclerItemClick
 import com.example.mahmudinm.androidcodeigniterinventory.utils.SessionManager;
 import com.example.mahmudinm.androidcodeigniterinventory.view.barang.BarangAdapter;
 import com.example.mahmudinm.androidcodeigniterinventory.view.barang.BarangPresenter;
+import com.example.mahmudinm.androidcodeigniterinventory.view.penjualan.editor.PenjualanActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -72,6 +74,11 @@ public class PenjualanFragment extends Fragment implements PenjualanView {
 
         return x;
 
+    }
+
+    @OnClick(R.id.fab) void editor() {
+        Intent intent = new Intent(getActivity(), PenjualanActivity.class);
+        startActivityForResult(intent, REQUEST_ADD);
     }
 
     @Override

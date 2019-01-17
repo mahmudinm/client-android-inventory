@@ -1,14 +1,18 @@
 package com.example.mahmudinm.androidcodeigniterinventory.network;
 
+import com.example.mahmudinm.androidcodeigniterinventory.model.Barang;
 import com.example.mahmudinm.androidcodeigniterinventory.network.response.AuthResponse;
 import com.example.mahmudinm.androidcodeigniterinventory.network.response.BarangResponse;
 import com.example.mahmudinm.androidcodeigniterinventory.network.response.PenjualanResponse;
 import com.example.mahmudinm.androidcodeigniterinventory.network.response.SupplierResponse;
 
+import java.util.List;
+
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -54,7 +58,8 @@ public interface ApiInterface {
     Observable<BarangResponse> getBarang(@Header("Authorization") String token);
 
     @GET("barang/list")
-    Observable<BarangResponse> getBarangList(@Header("Authorization") String token);
+    Call<BarangResponse> getBarangList(@Header("Authorization") String token);
+//    Observable<BarangResponse> getBarangList(@Header("Authorization") String token);
 
     @Multipart
     @POST("barang")
