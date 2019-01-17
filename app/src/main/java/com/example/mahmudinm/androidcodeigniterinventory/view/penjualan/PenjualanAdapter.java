@@ -48,7 +48,7 @@ public class PenjualanAdapter extends RecyclerView.Adapter<PenjualanAdapter.View
         Penjualan penjualan = penjualans.get(i);
         viewHolder.nama.setText(penjualan.getNama());
         viewHolder.jumlah_barang.setText("Jumlah Barang : " + penjualan.getJumlah_barang());
-        viewHolder.jumlah_harga.setText("Total : " + penjualan.getNama());
+        viewHolder.jumlah_harga.setText("Total : " + penjualan.getJumlah_harga());
         viewHolder.tanggal.setText(penjualan.getTanggal());
     }
 

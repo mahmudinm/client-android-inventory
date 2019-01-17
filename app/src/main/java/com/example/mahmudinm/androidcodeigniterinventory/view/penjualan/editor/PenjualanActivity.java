@@ -93,7 +93,12 @@ public class PenjualanActivity extends AppCompatActivity implements PenjualanVie
     }
 
     @OnClick(R.id.simpan) void simpan() {
-        Toast.makeText(this, nama + harga + barang_id, Toast.LENGTH_SHORT).show();
+        presenter.savePenjualan(
+                session.getKeyToken(),
+                barang_id,
+                et_jumlah_barang.getText().toString(),
+                et_jumlah_harga.getText().toString()
+        );
     }
 
 

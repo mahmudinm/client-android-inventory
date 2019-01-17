@@ -4,6 +4,7 @@ import com.example.mahmudinm.androidcodeigniterinventory.network.ApiClient;
 import com.example.mahmudinm.androidcodeigniterinventory.network.ApiInterface;
 import com.example.mahmudinm.androidcodeigniterinventory.network.response.BarangResponse;
 import com.example.mahmudinm.androidcodeigniterinventory.network.response.PenjualanResponse;
+import com.example.mahmudinm.androidcodeigniterinventory.network.response.SupplierResponse;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -47,6 +48,32 @@ public class PenjualanPresenter {
                             view.hideProgress();
                         }
                     })
+        );
+    }
+
+    void savePenjualan(String token, String barang_id, String jumlah_barang, String jumlah_harga) {
+        view.showProgress();
+        disposable.add(
+                apiInterface.savePenjualan(token, barang_id, jumlah_barang, jumlah_harga)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeWith(new DisposableObserver<PenjualanResponse>() {
+                            @Override
+                            public void onNext(PenjualanResponse penjualanResponse) {
+                                view.statusSuccess(penjualanResponse.getStatus());
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                view.hideProgress();
+                                view.statusError(e.getLocalizedMessage());
+                            }
+
+                            @Override
+                            public void onComplete() {
+                                view.hideProgress();
+                            }
+                        })
         );
     }
 
