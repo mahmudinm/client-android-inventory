@@ -21,7 +21,7 @@ public class PenjualanPresenter {
         compositeDisposable = new CompositeDisposable();
     }
 
-    public void getBarang(String token) {
+    public void getPenjualan(String token) {
         view.showProgress();
         compositeDisposable.add(
                 apiInterface.getPenjualan(token)
