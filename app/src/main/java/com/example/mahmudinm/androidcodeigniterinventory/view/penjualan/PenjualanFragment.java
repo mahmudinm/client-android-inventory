@@ -64,6 +64,7 @@ public class PenjualanFragment extends Fragment implements PenjualanView {
         // Inflate the layout for this fragment
         View x = inflater.inflate(R.layout.fragment_barang, container, false);
         ButterKnife.bind(this, x );
+        getActivity().setTitle("Penjualan / Transaksi ");
 
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Loading ...");

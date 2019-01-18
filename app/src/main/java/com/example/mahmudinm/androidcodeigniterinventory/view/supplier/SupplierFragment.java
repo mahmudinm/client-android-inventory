@@ -61,6 +61,7 @@ public class SupplierFragment extends Fragment implements SupplierView{
         View x = inflater.inflate(R.layout.fragment_supplier, container, false);
         session = new SessionManager(getActivity());
         ButterKnife.bind(this, x);
+        getActivity().setTitle("Data Supplier");
 
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Loading ...");
