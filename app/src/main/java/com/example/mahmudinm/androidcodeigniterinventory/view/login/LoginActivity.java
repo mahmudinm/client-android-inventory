@@ -47,7 +47,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         presenter = new LoginPresenter(this);
         sessionManager = new SessionManager(getApplicationContext());
 
-
         if (sessionManager.isLoggedIn()) {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
@@ -70,7 +69,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @Override
     public void hideProgress() {
         progressDialog.dismiss();
-
     }
 
     @Override
@@ -89,6 +87,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     public void statusError(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         Log.d("Error", "statusError: " + message);
-
     }
+
 }

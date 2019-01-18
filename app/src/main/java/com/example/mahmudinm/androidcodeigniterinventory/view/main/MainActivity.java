@@ -37,6 +37,10 @@ public class MainActivity extends AppCompatActivity
 
         sessionManager = new SessionManager(getApplicationContext());
 
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.mainFrame, new PenjualanFragment())
+                .commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
