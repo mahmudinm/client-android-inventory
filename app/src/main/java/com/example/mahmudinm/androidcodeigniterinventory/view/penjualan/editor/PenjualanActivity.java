@@ -2,6 +2,7 @@ package com.example.mahmudinm.androidcodeigniterinventory.view.penjualan.editor;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,7 +36,7 @@ public class PenjualanActivity extends AppCompatActivity implements PenjualanVie
     SessionManager session;
     Context mContext;
 
-    String barang_id, nama, harga, jumlah_harga, jumlah_barang;
+    String id, barang_id, nama, harga, jumlah_harga, jumlah_barang;
 
     @BindView(R.id.nama)
     Spinner s_nama;
@@ -63,6 +64,9 @@ public class PenjualanActivity extends AppCompatActivity implements PenjualanVie
 
         presenter.getListBarang(session.getKeyToken());
 
+        initDataIntent();
+        setTextEditor();
+
         s_nama.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -79,7 +83,7 @@ public class PenjualanActivity extends AppCompatActivity implements PenjualanVie
 
     }
 
-    @OnTextChanged(R.id.jumlah_barang) void change_jumlah_barang() {
+    @OnTextChanged(R.id.jumlah_barang) void jumlah_barang() {
         // Cek jika value nya di kosongkan
         String s_jumlah_barang;
         if (et_jumlah_barang.getText().toString().isEmpty()) {
@@ -88,8 +92,12 @@ public class PenjualanActivity extends AppCompatActivity implements PenjualanVie
             s_jumlah_barang = et_jumlah_barang.getText().toString();
         }
 
-        int total = Integer.parseInt(s_jumlah_barang) * Integer.parseInt(harga);
-        et_jumlah_harga.setText(String.valueOf(total));
+        try {
+            int total = Integer.parseInt(s_jumlah_barang) * Integer.parseInt(harga);
+            et_jumlah_harga.setText(String.valueOf(total));
+        } catch (NumberFormatException e) {
+
+        }
     }
 
     @OnClick(R.id.simpan) void simpan() {
@@ -131,5 +139,38 @@ public class PenjualanActivity extends AppCompatActivity implements PenjualanVie
         s_nama.setAdapter(adapter);
     }
 
+    private void initDataIntent() {
+        Intent intent= getIntent();
+        id = intent.getStringExtra("id");
+        barang_id = intent.getStringExtra("barang_id");
+        jumlah_barang = intent.getStringExtra("jumlah_barang");
+        jumlah_harga = intent.getStringExtra("jumlah_harga");
+    }
 
+    private void setTextEditor() {
+        if (id != null) {
+            getSupportActionBar().setTitle("Update data");
+            et_jumlah_barang.setText(jumlah_barang);
+            et_jumlah_harga.setText(jumlah_harga);
+
+            s_nama.setSelection(getIndex(s_nama, id));
+
+            content_update.setVisibility(View.VISIBLE);
+            content_simpan.setVisibility(View.GONE);
+        } else {
+            getSupportActionBar().setTitle("Simpan data");
+        }
+    }
+
+
+    //private method of your class
+    private int getIndex(Spinner spinner, String myString){
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
+                return i;
+            }
+        }
+
+        return 0;
+    }
 }
