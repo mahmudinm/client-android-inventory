@@ -33,14 +33,12 @@ import static android.app.Activity.RESULT_OK;
  */
 public class SupplierFragment extends Fragment implements SupplierView{
 
-    ProgressDialog progressDialog;
     SupplierPresenter presenter;
     SessionManager session;
     SupplierAdapter adapter;
 
     private static final int REQUEST_ADD = 1;
     private static final int REQUEST_UPDATE = 1;
-
 
     @BindView(R.id.recyclerSupplier)
     RecyclerView recyclerView;
@@ -62,9 +60,6 @@ public class SupplierFragment extends Fragment implements SupplierView{
         session = new SessionManager(getActivity());
         ButterKnife.bind(this, x);
         getActivity().setTitle("Data Supplier");
-
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Loading ...");
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -89,12 +84,12 @@ public class SupplierFragment extends Fragment implements SupplierView{
 
     @Override
     public void showProgress() {
-        progressDialog.show();
+        swipe.setRefreshing(true);
     }
 
     @Override
     public void hideProgress() {
-        progressDialog.dismiss();
+        swipe.setRefreshing(false);
     }
 
     @Override

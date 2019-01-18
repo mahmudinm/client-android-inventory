@@ -36,7 +36,6 @@ public class BarangFragment extends Fragment implements BarangView {
     SessionManager session;
     BarangPresenter presenter;
     BarangAdapter adapter;
-    ProgressDialog progressDialog;
 
     private static final int REQUEST_ADD = 1;
     private static final int REQUEST_UPDATE = 2;
@@ -63,9 +62,6 @@ public class BarangFragment extends Fragment implements BarangView {
         ButterKnife.bind(this, x );
         getActivity().setTitle("Data Barang");
 
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Loading ...");
-
         session = new SessionManager(getActivity());
         presenter = new BarangPresenter(this);
         presenter.getBarang(session.getKeyToken());
@@ -82,12 +78,12 @@ public class BarangFragment extends Fragment implements BarangView {
 
     @Override
     public void showProgress() {
-        progressDialog.show();
+        swipe.setRefreshing(true);
     }
 
     @Override
     public void hideProgress() {
-        progressDialog.dismiss();
+        swipe.setRefreshing(false);
     }
 
     @Override

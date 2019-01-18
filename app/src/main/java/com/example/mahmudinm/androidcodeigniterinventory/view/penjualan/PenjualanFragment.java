@@ -39,7 +39,6 @@ public class PenjualanFragment extends Fragment implements PenjualanView {
     SessionManager session;
     PenjualanPresenter presenter;
     PenjualanAdapter adapter;
-    ProgressDialog progressDialog;
 
     private static final int REQUEST_ADD = 1;
     private static final int REQUEST_UPDATE = 2;
@@ -66,9 +65,6 @@ public class PenjualanFragment extends Fragment implements PenjualanView {
         ButterKnife.bind(this, x );
         getActivity().setTitle("Penjualan / Transaksi ");
 
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Loading ...");
-
         session = new SessionManager(getActivity());
         presenter = new PenjualanPresenter(this);
         presenter.getPenjualan(session.getKeyToken());
@@ -86,12 +82,12 @@ public class PenjualanFragment extends Fragment implements PenjualanView {
 
     @Override
     public void showProgress() {
-        progressDialog.show();
+        swipe.setRefreshing(true);
     }
 
     @Override
     public void hideProgress() {
-        progressDialog.dismiss();
+        swipe.setRefreshing(false);
     }
 
     @Override
