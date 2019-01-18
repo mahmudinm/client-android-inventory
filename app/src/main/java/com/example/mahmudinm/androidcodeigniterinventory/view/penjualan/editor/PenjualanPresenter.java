@@ -8,6 +8,7 @@ import com.example.mahmudinm.androidcodeigniterinventory.network.response.Suppli
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableCompletableObserver;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
@@ -76,5 +77,50 @@ public class PenjualanPresenter {
                         })
         );
     }
+
+    void updatePenjualan(String token, String id, String barang_id, String jumlah_barang, String jumlah_harga) {
+        view.showProgress();
+        disposable.add(
+                apiInterface.updatePenjualan(token, id, barang_id, jumlah_barang, jumlah_harga)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeWith(new DisposableCompletableObserver(){
+                            @Override
+                            public void onComplete() {
+                                view.hideProgress();
+                                view.statusSuccess("berhasil update");
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                view.hideProgress();
+                                view.statusError(e.getLocalizedMessage());
+                            }
+                        })
+        );
+    }
+
+    void deletePenjualan(String token, String id) {
+        view.showProgress();
+        disposable.add(
+                apiInterface.deletePenjualan(token, id)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeWith(new DisposableCompletableObserver(){
+                            @Override
+                            public void onComplete() {
+                                view.hideProgress();
+                                view.statusSuccess("berhasil delete");
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                view.hideProgress();
+                                view.statusError(e.getLocalizedMessage());
+                            }
+                        })
+        );
+    }
+
 
 }

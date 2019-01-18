@@ -35,7 +35,6 @@ public class PenjualanActivity extends AppCompatActivity implements PenjualanVie
     ProgressDialog progressDialog;
     SessionManager session;
     SpinnerBarangAdapter adapter;
-//    Context mContext;
 
     String id, barang_id, nama, harga, jumlah_harga, jumlah_barang;
 
@@ -82,7 +81,7 @@ public class PenjualanActivity extends AppCompatActivity implements PenjualanVie
         });
 
     }
-    
+
     @OnTextChanged(R.id.jumlah_barang) void jumlah_barang() {
         // Cek jika value nya di kosongkan
         String s_jumlah_barang;
@@ -110,9 +109,21 @@ public class PenjualanActivity extends AppCompatActivity implements PenjualanVie
     }
 
     @OnClick(R.id.update) void update() {
-        Toast.makeText(this, barang_id, Toast.LENGTH_SHORT).show();
+        presenter.updatePenjualan(
+                session.getKeyToken(),
+                id,
+                barang_id,
+                et_jumlah_barang.getText().toString(),
+                et_jumlah_harga.getText().toString()
+        );
     }
 
+    @OnClick(R.id.hapus) void hapus() {
+        presenter.deletePenjualan(
+                session.getKeyToken(),
+                id
+        );
+    }
 
     @Override
     public void showProgress() {
@@ -156,9 +167,9 @@ public class PenjualanActivity extends AppCompatActivity implements PenjualanVie
     private void setTextEditor() {
         if (id != null) {
             getSupportActionBar().setTitle("Update data");
+
             et_jumlah_barang.setText(jumlah_barang);
             et_jumlah_harga.setText(jumlah_harga);
-
             s_nama.setSelection(adapter.getItemIndexById(barang_id));
 
             content_update.setVisibility(View.VISIBLE);
@@ -167,6 +178,5 @@ public class PenjualanActivity extends AppCompatActivity implements PenjualanVie
             getSupportActionBar().setTitle("Simpan data");
         }
     }
-
 
 }
