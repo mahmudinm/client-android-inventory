@@ -19,6 +19,7 @@ import com.example.mahmudinm.androidcodeigniterinventory.model.Penjualan;
 import com.example.mahmudinm.androidcodeigniterinventory.network.response.PenjualanResponse;
 import com.example.mahmudinm.androidcodeigniterinventory.utils.RecyclerItemClickListener;
 import com.example.mahmudinm.androidcodeigniterinventory.utils.SessionManager;
+import com.example.mahmudinm.androidcodeigniterinventory.utils.SimpleDividerItemDecoration;
 import com.example.mahmudinm.androidcodeigniterinventory.view.barang.BarangAdapter;
 import com.example.mahmudinm.androidcodeigniterinventory.view.barang.BarangPresenter;
 import com.example.mahmudinm.androidcodeigniterinventory.view.penjualan.editor.PenjualanActivity;
@@ -96,6 +97,7 @@ public class PenjualanFragment extends Fragment implements PenjualanView {
     public void statusSuccess(PenjualanResponse penjualanResponse) {
         adapter = new PenjualanAdapter(penjualanResponse.getData());
         recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(getActivity()));
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(),
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override

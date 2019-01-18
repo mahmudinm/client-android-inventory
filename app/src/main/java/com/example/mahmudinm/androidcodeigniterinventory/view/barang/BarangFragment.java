@@ -19,6 +19,7 @@ import com.example.mahmudinm.androidcodeigniterinventory.model.Barang;
 import com.example.mahmudinm.androidcodeigniterinventory.network.response.BarangResponse;
 import com.example.mahmudinm.androidcodeigniterinventory.utils.RecyclerItemClickListener;
 import com.example.mahmudinm.androidcodeigniterinventory.utils.SessionManager;
+import com.example.mahmudinm.androidcodeigniterinventory.utils.SimpleDividerItemDecoration;
 import com.example.mahmudinm.androidcodeigniterinventory.view.barang.editor.BarangActivity;
 
 import butterknife.BindView;
@@ -92,6 +93,7 @@ public class BarangFragment extends Fragment implements BarangView {
     public void statusSuccess(BarangResponse barangResponse) {
         adapter = new BarangAdapter(barangResponse.getData(), getActivity());
         recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(getActivity()));
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(),
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override

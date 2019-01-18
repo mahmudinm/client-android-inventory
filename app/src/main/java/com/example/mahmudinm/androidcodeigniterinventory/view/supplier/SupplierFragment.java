@@ -19,6 +19,7 @@ import com.example.mahmudinm.androidcodeigniterinventory.model.Supplier;
 import com.example.mahmudinm.androidcodeigniterinventory.network.response.SupplierResponse;
 import com.example.mahmudinm.androidcodeigniterinventory.utils.RecyclerItemClickListener;
 import com.example.mahmudinm.androidcodeigniterinventory.utils.SessionManager;
+import com.example.mahmudinm.androidcodeigniterinventory.utils.SimpleDividerItemDecoration;
 import com.example.mahmudinm.androidcodeigniterinventory.view.supplier.editor.SupplierActivity;
 
 import butterknife.BindView;
@@ -98,8 +99,8 @@ public class SupplierFragment extends Fragment implements SupplierView{
     @Override
     public void statusSuccess(SupplierResponse supplierResponse) {
         adapter = new SupplierAdapter(supplierResponse.getData());
-        Log.d("test", "statusSuccess: " + supplierResponse.getData());
         recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(getActivity()));
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(),
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
