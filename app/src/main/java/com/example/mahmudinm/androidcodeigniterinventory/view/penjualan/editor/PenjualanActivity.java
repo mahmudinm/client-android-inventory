@@ -34,7 +34,8 @@ public class PenjualanActivity extends AppCompatActivity implements PenjualanVie
     PenjualanPresenter presenter;
     ProgressDialog progressDialog;
     SessionManager session;
-    Context mContext;
+    SpinnerBarangAdapter adapter;
+//    Context mContext;
 
     String id, barang_id, nama, harga, jumlah_harga, jumlah_barang;
 
@@ -65,7 +66,6 @@ public class PenjualanActivity extends AppCompatActivity implements PenjualanVie
         presenter.getListBarang(session.getKeyToken());
 
         initDataIntent();
-        setTextEditor();
 
         s_nama.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -82,7 +82,7 @@ public class PenjualanActivity extends AppCompatActivity implements PenjualanVie
         });
 
     }
-
+    
     @OnTextChanged(R.id.jumlah_barang) void jumlah_barang() {
         // Cek jika value nya di kosongkan
         String s_jumlah_barang;
@@ -107,6 +107,10 @@ public class PenjualanActivity extends AppCompatActivity implements PenjualanVie
                 et_jumlah_barang.getText().toString(),
                 et_jumlah_harga.getText().toString()
         );
+    }
+
+    @OnClick(R.id.update) void update() {
+        Toast.makeText(this, barang_id, Toast.LENGTH_SHORT).show();
     }
 
 
@@ -134,9 +138,11 @@ public class PenjualanActivity extends AppCompatActivity implements PenjualanVie
 
     @Override
     public void setListBarang(BarangResponse barangResponse) {
-        SpinnerBarangAdapter adapter = new SpinnerBarangAdapter(this, R.layout.spinner_barang,
+        adapter = new SpinnerBarangAdapter(this, R.layout.spinner_barang,
                 barangResponse.getData());
         s_nama.setAdapter(adapter);
+
+        setTextEditor();
     }
 
     private void initDataIntent() {
@@ -153,7 +159,7 @@ public class PenjualanActivity extends AppCompatActivity implements PenjualanVie
             et_jumlah_barang.setText(jumlah_barang);
             et_jumlah_harga.setText(jumlah_harga);
 
-            s_nama.setSelection(getIndex(s_nama, id));
+            s_nama.setSelection(adapter.getItemIndexById(barang_id));
 
             content_update.setVisibility(View.VISIBLE);
             content_simpan.setVisibility(View.GONE);
@@ -163,14 +169,4 @@ public class PenjualanActivity extends AppCompatActivity implements PenjualanVie
     }
 
 
-    //private method of your class
-    private int getIndex(Spinner spinner, String myString){
-        for (int i=0;i<spinner.getCount();i++){
-            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
-                return i;
-            }
-        }
-
-        return 0;
-    }
 }

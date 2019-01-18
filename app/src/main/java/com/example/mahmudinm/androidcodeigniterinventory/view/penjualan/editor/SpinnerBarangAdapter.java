@@ -45,6 +45,16 @@ public class SpinnerBarangAdapter extends ArrayAdapter<String> {
         return createItemView(position, convertView, parent);
     }
 
+
+    public int getItemIndexById(String barang_id) {
+        for (Barang barang : this.barangs) {
+            if(barang.getId().toString().equals(barang_id.toString())){
+                return this.barangs.indexOf(barang);
+            }
+        }
+        return 0;
+    }
+
     private View createItemView(int position, View convertView, ViewGroup parent){
         final View view = mInflater.inflate(mResource, parent, false);
 
