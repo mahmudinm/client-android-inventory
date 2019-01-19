@@ -47,10 +47,10 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         presenter = new LoginPresenter(this);
         sessionManager = new SessionManager(getApplicationContext());
 
-        if (sessionManager.isLoggedIn()) {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
-        }
+//        if (sessionManager.isLoggedIn()) {
+//            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//            startActivity(intent);
+//        }
 
     }
 

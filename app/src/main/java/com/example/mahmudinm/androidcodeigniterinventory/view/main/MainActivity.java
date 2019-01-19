@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         sessionManager = new SessionManager(getApplicationContext());
+        sessionManager.checkLogin();
 
         getSupportFragmentManager()
                 .beginTransaction()
