@@ -32,8 +32,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     ProgressDialog progressDialog;
     SessionManager sessionManager;
 
-    @BindView(R.id.txtUsername) EditText username;
-    @BindView(R.id.txtPassword) EditText password;
+    @BindView(R.id.txtUsername) EditText et_username;
+    @BindView(R.id.txtPassword) EditText et_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,17 +47,12 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         presenter = new LoginPresenter(this);
         sessionManager = new SessionManager(getApplicationContext());
 
-//        if (sessionManager.isLoggedIn()) {
-//            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//            startActivity(intent);
-//        }
-
     }
 
     @OnClick(R.id.login) void login() {
         presenter.loginAuth(
-                username.getText().toString(),
-                password.getText().toString()
+                et_username.getText().toString(),
+                et_password.getText().toString()
         );
     }
 

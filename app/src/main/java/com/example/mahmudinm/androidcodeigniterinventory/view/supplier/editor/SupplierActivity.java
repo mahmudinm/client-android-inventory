@@ -25,13 +25,13 @@ public class SupplierActivity extends AppCompatActivity implements SupplierView 
     String id, nama, no_hp, alamat;
 
     @BindView(R.id.nama)
-    EditText txtNama;
+    EditText et_nama;
 
     @BindView(R.id.no_hp)
-    EditText txtNo_hp;
+    EditText et_no_hp;
 
     @BindView(R.id.alamat)
-    EditText txtAlamat;
+    EditText et_alamat;
 
     @BindView(R.id.content_simpan)
     LinearLayout content_simpan;
@@ -59,9 +59,9 @@ public class SupplierActivity extends AppCompatActivity implements SupplierView 
     @OnClick(R.id.simpan) void simpan(){
         presenter.saveSupplier(
                 session.getKeyToken(),
-                txtNama.getText().toString(),
-                txtNo_hp.getText().toString(),
-                txtAlamat.getText().toString()
+                et_nama.getText().toString(),
+                et_no_hp.getText().toString(),
+                et_alamat.getText().toString()
         );
     }
 
@@ -69,9 +69,9 @@ public class SupplierActivity extends AppCompatActivity implements SupplierView 
         presenter.updateSupplier(
                 session.getKeyToken(),
                 id,
-                txtNama.getText().toString(),
-                txtNo_hp.getText().toString(),
-                txtAlamat.getText().toString()
+                et_nama.getText().toString(),
+                et_no_hp.getText().toString(),
+                et_alamat.getText().toString()
         );
     }
 
@@ -116,9 +116,9 @@ public class SupplierActivity extends AppCompatActivity implements SupplierView 
     private void setTextEditor() {
         if (id != null) {
             getSupportActionBar().setTitle("Update data");
-            txtNama.setText(nama);
-            txtAlamat.setText(alamat);
-            txtNo_hp.setText(no_hp);
+            et_nama.setText(nama);
+            et_alamat.setText(alamat);
+            et_no_hp.setText(no_hp);
             content_update.setVisibility(View.VISIBLE);
             content_simpan.setVisibility(View.GONE);
         } else {
