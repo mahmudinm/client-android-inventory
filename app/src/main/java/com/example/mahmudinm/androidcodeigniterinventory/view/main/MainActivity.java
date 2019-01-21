@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,18 +17,20 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.mahmudinm.androidcodeigniterinventory.R;
+import com.example.mahmudinm.androidcodeigniterinventory.network.response.PenjualanResponse;
 import com.example.mahmudinm.androidcodeigniterinventory.utils.SessionManager;
 import com.example.mahmudinm.androidcodeigniterinventory.view.barang.BarangFragment;
 import com.example.mahmudinm.androidcodeigniterinventory.view.penjualan.PenjualanFragment;
+import com.example.mahmudinm.androidcodeigniterinventory.view.penjualan.PenjualanPresenter;
+import com.example.mahmudinm.androidcodeigniterinventory.view.penjualan.PenjualanView;
 import com.example.mahmudinm.androidcodeigniterinventory.view.supplier.SupplierFragment;
 
 import butterknife.BindView;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
 
     SessionManager sessionManager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,17 +41,21 @@ public class MainActivity extends AppCompatActivity
         sessionManager = new SessionManager(getApplicationContext());
         sessionManager.checkLogin();
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.mainFrame, new PenjualanFragment())
-                .commit();
+        if (savedInstanceState == null) {   
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.mainFrame, new PenjualanFragment());
+            fragmentTransaction.commit();
+        }
+//        getSupportFragmentManager()
+//                .beginTransaction()
+//                .replace(R.id.mainFrame, new PenjualanFragment())
+//                .commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
 
         // Set text Navigation drawer
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -57,6 +64,7 @@ public class MainActivity extends AppCompatActivity
         tv_username.setText(sessionManager.getKeyUsername());
 
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getMenu().getItem(0).setChecked(true);
     }
 
     @Override
