@@ -92,6 +92,8 @@ public class SupplierPresenter {
         );
     }
 
-
+    public void detachView() {
+        disposable.dispose();
+    }
 
 }

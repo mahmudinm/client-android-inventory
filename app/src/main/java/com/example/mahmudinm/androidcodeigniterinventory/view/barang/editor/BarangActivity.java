@@ -224,6 +224,12 @@ public class BarangActivity extends AppCompatActivity implements BarangView {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.detachView();
+    }
+
     private void initDataIntent() {
         Intent intent= getIntent();
         id = intent.getStringExtra("id");

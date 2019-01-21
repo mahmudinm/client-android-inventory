@@ -156,6 +156,12 @@ public class PenjualanActivity extends AppCompatActivity implements PenjualanVie
         setTextEditor();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.detachView();
+    }
+
     private void initDataIntent() {
         Intent intent= getIntent();
         id = intent.getStringExtra("id");

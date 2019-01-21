@@ -13,18 +13,18 @@ public class LoginPresenter {
 
     private LoginView view;
     private ApiInterface apiInterface;
-    private CompositeDisposable compositeDisposable;
+    private CompositeDisposable disposable;
 
     public LoginPresenter(LoginView view) {
         this.view = view;
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        compositeDisposable = new CompositeDisposable();
+        disposable = new CompositeDisposable();
     }
 
 
     public void loginAuth(String username, String password) {
         view.showProgress();
-        compositeDisposable.add(
+        disposable.add(
           apiInterface.postAuth(username, password)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -52,5 +52,7 @@ public class LoginPresenter {
         );
     }
 
-
+    public void detachView() {
+        disposable.dispose();
+    }
 }

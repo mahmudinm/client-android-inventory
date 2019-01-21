@@ -130,4 +130,10 @@ public class SupplierFragment extends Fragment implements SupplierView{
             presenter.getSuppliers(session.getKeyToken());
         }
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.detachView();
+    }
 }

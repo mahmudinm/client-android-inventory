@@ -92,4 +92,8 @@ public class BarangPresenter {
                         })
         );
     }
+
+    public void detachView() {
+        disposable.dispose();
+    }
 }

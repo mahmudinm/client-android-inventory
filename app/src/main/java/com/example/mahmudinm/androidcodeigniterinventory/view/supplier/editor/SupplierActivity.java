@@ -105,6 +105,12 @@ public class SupplierActivity extends AppCompatActivity implements SupplierView 
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.detachView();
+    }
+
     private void initDataIntent() {
         Intent intent= getIntent();
         id = intent.getStringExtra("id");

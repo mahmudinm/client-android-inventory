@@ -128,4 +128,11 @@ public class PenjualanFragment extends Fragment implements PenjualanView {
             presenter.getPenjualan(session.getKeyToken());
         }
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.detachView();
+    }
+
 }

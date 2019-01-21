@@ -13,17 +13,17 @@ public class PenjualanPresenter {
 
     PenjualanView view;
     ApiInterface apiInterface;
-    CompositeDisposable compositeDisposable;
+    CompositeDisposable disposable;
 
     public PenjualanPresenter(PenjualanView view) {
         this.view = view;
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        compositeDisposable = new CompositeDisposable();
+        disposable = new CompositeDisposable();
     }
 
     public void getPenjualan(String token) {
         view.showProgress();
-        compositeDisposable.add(
+        disposable.add(
                 apiInterface.getPenjualan(token)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -47,4 +47,7 @@ public class PenjualanPresenter {
         );
     }
 
+    public void detachView() {
+        disposable.dispose();
+    }
 }

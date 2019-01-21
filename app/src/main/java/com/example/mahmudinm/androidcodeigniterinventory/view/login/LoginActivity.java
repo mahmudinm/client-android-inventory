@@ -84,4 +84,10 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         Log.d("Error", "statusError: " + message);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.detachView();
+    }
+
 }

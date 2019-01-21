@@ -67,6 +67,7 @@ public class BarangFragment extends Fragment implements BarangView {
         presenter.getBarang(session.getKeyToken());
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setHasFixedSize(true);
 
         return x;
     }
@@ -126,5 +127,11 @@ public class BarangFragment extends Fragment implements BarangView {
         } else if (requestCode == REQUEST_UPDATE && resultCode == RESULT_OK) {
             presenter.getBarang(session.getKeyToken());
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.detachView();
     }
 }

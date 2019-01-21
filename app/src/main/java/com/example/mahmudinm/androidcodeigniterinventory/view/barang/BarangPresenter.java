@@ -13,17 +13,17 @@ public class BarangPresenter {
 
     BarangView view;
     ApiInterface apiInterface;
-    CompositeDisposable compositeDisposable;
+    CompositeDisposable disposable;
 
     public BarangPresenter(BarangView view) {
         this.view = view;
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        compositeDisposable = new CompositeDisposable();
+        disposable = new CompositeDisposable();
     }
 
     public void getBarang(String token) {
         view.showProgress();
-        compositeDisposable.add(
+        disposable.add(
                 apiInterface.getBarang(token)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -45,6 +45,10 @@ public class BarangPresenter {
                             }
                         })
         );
+    }
+
+    public void detachView() {
+        disposable.dispose();
     }
 
 }

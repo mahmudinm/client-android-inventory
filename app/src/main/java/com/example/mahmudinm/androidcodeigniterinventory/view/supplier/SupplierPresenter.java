@@ -13,17 +13,17 @@ public class SupplierPresenter {
 
     SupplierView view;
     ApiInterface apiInterface;
-    CompositeDisposable compositeDisposable;
+    CompositeDisposable disposable;
 
     public SupplierPresenter(SupplierView supplierView) {
         this.view = supplierView;
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        compositeDisposable = new CompositeDisposable();
+        disposable = new CompositeDisposable();
     }
 
     public void getSuppliers(String token) {
         view.showProgress();
-        compositeDisposable.add(
+        disposable.add(
                 apiInterface.getSuppliers(token)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -49,6 +49,10 @@ public class SupplierPresenter {
                             }
                         })
         );
+    }
+
+    public void detachView() {
+        disposable.dispose();
     }
 
 }

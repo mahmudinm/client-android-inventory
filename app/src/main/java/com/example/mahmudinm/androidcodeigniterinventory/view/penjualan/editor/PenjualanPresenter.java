@@ -122,5 +122,8 @@ public class PenjualanPresenter {
         );
     }
 
+    public void detachView() {
+        disposable.dispose();
+    }
 
 }
