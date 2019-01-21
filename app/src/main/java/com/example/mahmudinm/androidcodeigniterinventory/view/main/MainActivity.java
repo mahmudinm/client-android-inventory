@@ -41,15 +41,12 @@ public class MainActivity extends AppCompatActivity
         sessionManager = new SessionManager(getApplicationContext());
         sessionManager.checkLogin();
 
-        if (savedInstanceState == null) {   
+//        Benerin bug ketika rotasi landsacpe malah pindah ke mainActivity
+        if (savedInstanceState == null) {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.mainFrame, new PenjualanFragment());
             fragmentTransaction.commit();
         }
-//        getSupportFragmentManager()
-//                .beginTransaction()
-//                .replace(R.id.mainFrame, new PenjualanFragment())
-//                .commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
