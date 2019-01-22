@@ -57,7 +57,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         session = new SessionManager(this);
         presenter = new SearchPresenter(this);
-        
+
     }
 
 
