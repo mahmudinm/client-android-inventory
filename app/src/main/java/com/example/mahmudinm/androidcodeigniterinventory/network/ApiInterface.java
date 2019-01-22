@@ -89,7 +89,7 @@ public interface ApiInterface {
 //Penjualan CRUD
     @GET("penjualan")
     Observable<PenjualanResponse> getPenjualan(@Header("Authorization") String token,
-                                               @Query("query") String query);
+                                               @Query("search") String search);
 
     @FormUrlEncoded
     @POST("penjualan")
