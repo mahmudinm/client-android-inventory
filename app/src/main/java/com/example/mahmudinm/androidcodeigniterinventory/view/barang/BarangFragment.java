@@ -68,6 +68,12 @@ public class BarangFragment extends Fragment implements BarangView {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(true);
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                presenter.getBarang(session.getKeyToken());
+            }
+        });
 
         return x;
     }

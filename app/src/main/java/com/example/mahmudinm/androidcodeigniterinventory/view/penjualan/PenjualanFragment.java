@@ -70,6 +70,12 @@ public class PenjualanFragment extends Fragment implements PenjualanView {
         presenter.getPenjualan(session.getKeyToken());
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                presenter.getPenjualan(session.getKeyToken());
+            }
+        });
 
         return x;
 
