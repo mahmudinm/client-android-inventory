@@ -23,6 +23,7 @@ import com.example.mahmudinm.androidcodeigniterinventory.view.barang.BarangFragm
 import com.example.mahmudinm.androidcodeigniterinventory.view.penjualan.PenjualanFragment;
 import com.example.mahmudinm.androidcodeigniterinventory.view.penjualan.PenjualanPresenter;
 import com.example.mahmudinm.androidcodeigniterinventory.view.penjualan.PenjualanView;
+import com.example.mahmudinm.androidcodeigniterinventory.view.search.SearchActivity;
 import com.example.mahmudinm.androidcodeigniterinventory.view.supplier.SupplierFragment;
 
 import butterknife.BindView;
@@ -107,5 +108,19 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onActivityReenter(int resultCode, Intent data) {
         super.onActivityReenter(resultCode, data);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.search) {
+            startActivity(new Intent(MainActivity.this, SearchActivity.class));
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
