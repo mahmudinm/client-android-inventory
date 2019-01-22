@@ -2,8 +2,6 @@ package com.example.mahmudinm.androidcodeigniterinventory.view.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -17,16 +15,11 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.mahmudinm.androidcodeigniterinventory.R;
-import com.example.mahmudinm.androidcodeigniterinventory.network.response.PenjualanResponse;
 import com.example.mahmudinm.androidcodeigniterinventory.utils.SessionManager;
 import com.example.mahmudinm.androidcodeigniterinventory.view.barang.BarangFragment;
 import com.example.mahmudinm.androidcodeigniterinventory.view.penjualan.PenjualanFragment;
-import com.example.mahmudinm.androidcodeigniterinventory.view.penjualan.PenjualanPresenter;
-import com.example.mahmudinm.androidcodeigniterinventory.view.penjualan.PenjualanView;
 import com.example.mahmudinm.androidcodeigniterinventory.view.search.SearchActivity;
 import com.example.mahmudinm.androidcodeigniterinventory.view.supplier.SupplierFragment;
-
-import butterknife.BindView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{

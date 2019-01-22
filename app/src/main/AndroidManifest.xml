@@ -44,7 +44,11 @@
         </activity>
         <activity android:name=".view.penjualan.editor.PenjualanActivity">
         </activity>
-        <activity android:name=".view.search.SearchActivity">
+        <activity
+            android:name=".view.search.SearchActivity"
+            android:label="@string/title_activity_search"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".view.main.MainActivity">
         </activity>
     </application>
 
