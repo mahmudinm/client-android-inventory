@@ -64,9 +64,9 @@
 
             <TextView
                 android:id="@+id/ukuran"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="L"
+                android:text="XXL"
                 android:textColor="#727272"
                 android:textSize="14dp"/>
 

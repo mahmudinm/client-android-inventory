@@ -14,9 +14,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -56,6 +58,7 @@ public class BarangActivity extends AppCompatActivity implements BarangView {
     static final int REQUEST_GALLERY = 1;
     static final int REQUEST_CAMERA = 2;
 
+
     @BindView(R.id.kode)
     EditText et_kode;
     @BindView(R.id.nama)
@@ -65,7 +68,7 @@ public class BarangActivity extends AppCompatActivity implements BarangView {
     @BindView(R.id.harga)
     EditText et_harga;
     @BindView(R.id.ukuran)
-    EditText et_ukuran;
+    Spinner s_ukuran;
     @BindView(R.id.gambar)
     ImageView iv_gambar;
     @BindView(R.id.content_simpan)
@@ -85,6 +88,7 @@ public class BarangActivity extends AppCompatActivity implements BarangView {
         session = new SessionManager(this);
         presenter = new BarangPresenter(this);
 
+        setSpinnerUkuran();
         initDataIntent();
         setTextEditor();
 
@@ -131,8 +135,8 @@ public class BarangActivity extends AppCompatActivity implements BarangView {
                 .toString());
         RequestBody hargaBody = RequestBody.create(MediaType.parse("text/plain"), et_harga.getText()
                 .toString());
-        RequestBody ukuranBody = RequestBody.create(MediaType.parse("text/plain"), et_ukuran.getText()
-                .toString());
+        RequestBody ukuranBody = RequestBody.create(MediaType.parse("text/plain"), s_ukuran
+                .getSelectedItem().toString());
 
         presenter.saveBarang(
                 session.getKeyToken(),
@@ -166,8 +170,8 @@ public class BarangActivity extends AppCompatActivity implements BarangView {
                 .toString());
         RequestBody hargaBody = RequestBody.create(MediaType.parse("text/plain"), et_harga.getText()
                 .toString());
-        RequestBody ukuranBody = RequestBody.create(MediaType.parse("text/plain"), et_ukuran.getText()
-                .toString());
+        RequestBody ukuranBody = RequestBody.create(MediaType.parse("text/plain"), s_ukuran
+                .getSelectedItem().toString());
 
         presenter.updateBarang(
                 session.getKeyToken(),
@@ -241,6 +245,13 @@ public class BarangActivity extends AppCompatActivity implements BarangView {
         gambar = intent.getStringExtra("gambar");
     }
 
+    private void setSpinnerUkuran() {
+        ArrayAdapter<String> spinnerArray = new ArrayAdapter<String>(this, android.R.layout
+                .simple_spinner_dropdown_item, getResources().getStringArray(R.array
+                .ukuran_arrays));
+        s_ukuran.setAdapter(spinnerArray);
+    }
+
     private void setTextEditor() {
         if (id != null) {
             getSupportActionBar().setTitle("Update data");
@@ -248,7 +259,7 @@ public class BarangActivity extends AppCompatActivity implements BarangView {
             et_kode.setText(kode);
             et_stock.setText(stock);
             et_harga.setText(harga);
-            et_ukuran.setText(ukuran);
+            s_ukuran.setSelection(getIndex(s_ukuran, ukuran));
 
             String URL = Const.URL + "upload/";
 
@@ -285,6 +296,16 @@ public class BarangActivity extends AppCompatActivity implements BarangView {
         } else {
 
         }
+    }
+
+    private int getIndex(Spinner spinner, String myString){
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
+                return i;
+            }
+        }
+
+        return 0;
     }
 
     private Uri ambilOutputMediaFileUri(int type_foto_code) {

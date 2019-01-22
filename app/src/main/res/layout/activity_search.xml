@@ -36,7 +36,7 @@
                     android:layout_weight="1"
                     android:background="#00000000"
                     android:completionThreshold="1"
-                    android:hint="Search"
+                    android:hint="Search Penjualan"
                     android:imeOptions="actionSearch"
                     android:inputType="text"
                     android:maxLines="1"

@@ -76,17 +76,29 @@
 
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <TextView
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="4dp"
+            android:text="Ukuran : "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Spinner
+            android:layout_marginTop="2dp"
+            android:id="@+id/ukuran"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content" />
+        <!--<android.support.design.widget.TextInputLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
 
-            <EditText
-                android:id="@+id/ukuran"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Ukuran"/>
+            <!--<EditText-->
+                <!--android:id="@+id/ukuran"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:hint="Ukuran"/>-->
 
-        </android.support.design.widget.TextInputLayout>
+        <!--</android.support.design.widget.TextInputLayout>-->
 
         <LinearLayout
             android:id="@+id/content_simpan"
