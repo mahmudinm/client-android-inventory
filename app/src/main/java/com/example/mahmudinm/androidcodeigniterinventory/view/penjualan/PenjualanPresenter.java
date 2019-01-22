@@ -21,10 +21,10 @@ public class PenjualanPresenter {
         disposable = new CompositeDisposable();
     }
 
-    public void getPenjualan(String token) {
+    public void getPenjualan(String token, String query) {
         view.showProgress();
         disposable.add(
-                apiInterface.getPenjualan(token)
+                apiInterface.getPenjualan(token, query)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeWith(new DisposableObserver<PenjualanResponse>(){

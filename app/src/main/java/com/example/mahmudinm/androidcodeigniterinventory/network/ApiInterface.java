@@ -21,6 +21,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiInterface {
 
@@ -87,8 +88,8 @@ public interface ApiInterface {
 
 //Penjualan CRUD
     @GET("penjualan")
-    Observable<PenjualanResponse> getPenjualan(@Header("Authorization") String token);
-
+    Observable<PenjualanResponse> getPenjualan(@Header("Authorization") String token,
+                                               @Query("query") String query);
 
     @FormUrlEncoded
     @POST("penjualan")

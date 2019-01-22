@@ -67,13 +67,13 @@ public class PenjualanFragment extends Fragment implements PenjualanView {
 
         session = new SessionManager(getActivity());
         presenter = new PenjualanPresenter(this);
-        presenter.getPenjualan(session.getKeyToken());
+        presenter.getPenjualan(session.getKeyToken(), "");
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                presenter.getPenjualan(session.getKeyToken());
+                presenter.getPenjualan(session.getKeyToken(), "");
             }
         });
 
@@ -129,9 +129,9 @@ public class PenjualanFragment extends Fragment implements PenjualanView {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_ADD && resultCode == RESULT_OK) {
-            presenter.getPenjualan(session.getKeyToken());
+            presenter.getPenjualan(session.getKeyToken(), "");
         } else if (requestCode == REQUEST_UPDATE && resultCode == RESULT_OK) {
-            presenter.getPenjualan(session.getKeyToken());
+            presenter.getPenjualan(session.getKeyToken(), "");
         }
     }
 
