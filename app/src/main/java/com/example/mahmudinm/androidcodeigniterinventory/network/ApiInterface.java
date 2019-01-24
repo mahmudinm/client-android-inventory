@@ -32,8 +32,9 @@ public interface ApiInterface {
                                       @Field("password") String password);
 
 //Supplier CRUD
-    @GET("supplier")
-    Observable<SupplierResponse> getSuppliers(@Header("Authorization") String token);
+    @GET("supplier/{page}")
+    Observable<SupplierResponse> getSuppliers(@Header("Authorization") String token,
+                                              @Path("page") String page);
 
     @FormUrlEncoded
     @POST("supplier")
