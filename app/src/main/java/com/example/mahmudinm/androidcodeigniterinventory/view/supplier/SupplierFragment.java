@@ -117,6 +117,11 @@ public class SupplierFragment extends Fragment implements SupplierView{
     }
 
     @Override
+    public void loadMore(SupplierResponse supplierResponse) {
+
+    }
+
+    @Override
     public void statusError(String message) {
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }

@@ -1,5 +1,7 @@
 package com.example.mahmudinm.androidcodeigniterinventory.view.supplier;
 
+import android.util.Log;
+
 import com.example.mahmudinm.androidcodeigniterinventory.network.ApiClient;
 import com.example.mahmudinm.androidcodeigniterinventory.network.ApiInterface;
 import com.example.mahmudinm.androidcodeigniterinventory.network.response.SupplierResponse;
@@ -48,6 +50,30 @@ public class SupplierPresenter {
 
                             }
                         })
+        );
+    }
+
+    public void loadMore(String token, String page) {
+        disposable.add(
+                apiInterface.getSuppliers(token, page)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribeWith(new DisposableObserver<SupplierResponse>() {
+                                @Override
+                                public void onNext(SupplierResponse supplierResponse) {
+                                    view.loadMore(supplierResponse);
+                                }
+
+                                @Override
+                                public void onError(Throwable e) {
+                                    Log.e("SupplierPresenter", "onError: " + e.getLocalizedMessage());
+                                }
+
+                                @Override
+                                public void onComplete() {
+
+                                }
+                            })
         );
     }
 
