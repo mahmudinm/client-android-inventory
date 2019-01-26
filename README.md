@@ -16,6 +16,9 @@
 
 # Referensi
 [https://www.codepolitan.com/rest-api-client-sederhana-dengan-retrofit-pada-android-studio-58986d62c46ae](https://www.codepolitan.com/rest-api-client-sederhana-dengan-retrofit-pada-android-studio-58986d62c46ae)
+
 [https://www.youtube.com/watch?v=Vh92eSAEu5c&t=9s](https://www.youtube.com/watch?v=Vh92eSAEu5c&t=9s)
+
 [https://www.androidhive.info/2012/08/android-session-management-using-shared-preferences/](https://www.androidhive.info/2012/08/android-session-management-using-shared-preferences/)
+
 [http://sab99r.com/blog/recyclerview-endless-load-more](http://sab99r.com/blog/recyclerview-endless-load-more)
