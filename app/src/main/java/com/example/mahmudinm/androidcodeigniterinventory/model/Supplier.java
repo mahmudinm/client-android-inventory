@@ -16,6 +16,10 @@ public class Supplier {
     @Expose
     @SerializedName("alamat") String alamat;
 
+    public Supplier(String alamat) {
+        this.alamat = alamat;
+    }
+
     public String getId() {
         return id;
     }

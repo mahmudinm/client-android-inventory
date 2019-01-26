@@ -22,6 +22,9 @@ import com.example.mahmudinm.androidcodeigniterinventory.utils.SessionManager;
 import com.example.mahmudinm.androidcodeigniterinventory.utils.SimpleDividerItemDecoration;
 import com.example.mahmudinm.androidcodeigniterinventory.view.supplier.editor.SupplierActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -36,6 +39,7 @@ public class SupplierFragment extends Fragment implements SupplierView{
     SupplierPresenter presenter;
     SessionManager session;
     SupplierAdapter adapter;
+    List<Supplier> suppliers;
 
     private static final int REQUEST_ADD = 1;
     private static final int REQUEST_UPDATE = 1;
@@ -61,10 +65,8 @@ public class SupplierFragment extends Fragment implements SupplierView{
         ButterKnife.bind(this, x);
         getActivity().setTitle("Data Supplier");
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        presenter = new SupplierPresenter(this);
-        presenter.getSuppliers(session.getKeyToken());
+        onSetRecyclerView();
+        onClickRecylerView();
 
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -72,10 +74,10 @@ public class SupplierFragment extends Fragment implements SupplierView{
                 presenter.getSuppliers(session.getKeyToken());
             }
         });
+        presenter.getSuppliers(session.getKeyToken());
 
         return x;
     }
-
 
     @OnClick(R.id.supplierFab) void editor() {
         Intent intent = new Intent(getActivity(), SupplierActivity.class);
@@ -94,9 +96,64 @@ public class SupplierFragment extends Fragment implements SupplierView{
 
     @Override
     public void statusSuccess(SupplierResponse supplierResponse) {
-        adapter = new SupplierAdapter(supplierResponse.getData());
-        recyclerView.setAdapter(adapter);
+//        suppliers.removeAll(suppliers);
+        suppliers.addAll(supplierResponse.getData());
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void loadMore(SupplierResponse supplierResponse) {
+        suppliers.remove(suppliers.size()-1);
+        List<Supplier> result = supplierResponse.getData();
+        if (result.size() > 0) {
+            suppliers.addAll(result);
+        } else {
+            adapter.setMoreDataAvailable(false);
+            Toast.makeText(getActivity(), "No more data", Toast.LENGTH_SHORT).show();
+        }
+        adapter.notifyDataChanged();
+    }
+
+    @Override
+    public void statusError(String message) {
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_ADD && resultCode == RESULT_OK) {
+            presenter.getSuppliers(session.getKeyToken());
+        } else if (requestCode == REQUEST_UPDATE && resultCode == RESULT_OK) {
+            presenter.getSuppliers(session.getKeyToken());
+        }
+    }
+
+    void onSetRecyclerView() {
+        suppliers = new ArrayList<>();
+        presenter = new SupplierPresenter(this);
+        adapter = new SupplierAdapter(suppliers);
+        adapter.setLoadMoreListener(new SupplierAdapter.OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                recyclerView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        int index = suppliers.size();
+                        suppliers.add(new Supplier("load"));
+                        adapter.notifyItemInserted(suppliers.size()-1);
+                        presenter.loadMore(session.getKeyToken(), Integer.toString(index));
+                    }
+                });
+            }
+        });
         recyclerView.addItemDecoration(new SimpleDividerItemDecoration(getActivity()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapter);
+    }
+
+    void onClickRecylerView() {
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(),
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
@@ -113,27 +170,6 @@ public class SupplierFragment extends Fragment implements SupplierView{
                         startActivityForResult(intent, REQUEST_UPDATE);
                     }
                 }));
-        adapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void loadMore(SupplierResponse supplierResponse) {
-
-    }
-
-    @Override
-    public void statusError(String message) {
-        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_ADD && resultCode == RESULT_OK) {
-            presenter.getSuppliers(session.getKeyToken());
-        } else if (requestCode == REQUEST_UPDATE && resultCode == RESULT_OK) {
-            presenter.getSuppliers(session.getKeyToken());
-        }
     }
 
     @Override

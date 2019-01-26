@@ -10,6 +10,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SupplierPresenter {
 
@@ -61,7 +64,11 @@ public class SupplierPresenter {
                             .subscribeWith(new DisposableObserver<SupplierResponse>() {
                                 @Override
                                 public void onNext(SupplierResponse supplierResponse) {
-                                    view.loadMore(supplierResponse);
+                                    if (supplierResponse.getStatus().equals("success")) {
+                                        view.loadMore(supplierResponse);
+                                    } else {
+//                                        view.statusError(supplierResponse.getStatus());
+                                    }
                                 }
 
                                 @Override

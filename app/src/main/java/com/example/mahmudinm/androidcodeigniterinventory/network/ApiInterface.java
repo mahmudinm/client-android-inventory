@@ -35,6 +35,9 @@ public interface ApiInterface {
     @GET("supplier/{page}")
     Observable<SupplierResponse> getSuppliers(@Header("Authorization") String token,
                                               @Path("page") String page);
+//    @GET("supplier/{page}")
+//    Call<SupplierResponse> getSuppliers(@Header("Authorization") String token,
+//                                        @Path("page") String page);
 
     @FormUrlEncoded
     @POST("supplier")

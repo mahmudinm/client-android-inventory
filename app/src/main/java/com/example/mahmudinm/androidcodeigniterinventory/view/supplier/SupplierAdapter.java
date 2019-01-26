@@ -43,29 +43,37 @@ public class SupplierAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         Supplier supplier = suppliers.get(i);
 
-        if (i >= getItemCount() -1 && isMoreDataAvailable && !isLoading && loadMoreListener !=
+//        if(i>=getItemCount()-1 && isMoreDataAvailable && !isLoading && loadMoreListener!=null){
+//            isLoading = true;
+//            loadMoreListener.onLoadMore();
+//        }
+//
+//        if(getItemViewType(i)==TYPE_LIST){
+//            ((ListHolder)viewHolder).bindData(suppliers.get(i));
+//        }
+        if (i >= getItemCount()-1 && isMoreDataAvailable && !isLoading && loadMoreListener !=
                 null) {
             isLoading = true;
             loadMoreListener.onLoadMore();
         }
 
         if (getItemViewType(i) == TYPE_LIST){
+//            ((ListHolder)viewHolder).bindData(suppliers.get(i));
             ListHolder listHolder = (ListHolder) viewHolder;
             listHolder.nama.setText(supplier.getNama());
             listHolder.no_hp.setText(supplier.getNo_hp());
             listHolder.alamat.setText(supplier.getAlamat());
         }
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return suppliers.size();
     }
 
     @Override
     public int getItemViewType(int position) {
         return (position == suppliers.size()) ? TYPE_LOAD : TYPE_LIST;
+    }
+
+    @Override
+    public int getItemCount() {
+        return suppliers.size();
     }
 
     public Supplier getSupplier(int position) {
@@ -82,6 +90,14 @@ public class SupplierAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             no_hp = itemView.findViewById(R.id.no_hp);
             alamat = itemView.findViewById(R.id.alamat);
         }
+
+//        void bindData(Supplier supplier){
+//            nama.setText(supplier.getNama());
+//            no_hp.setText(supplier.getNo_hp());
+//            alamat.setText(supplier.getAlamat());
+////            tvNama.setText(supplier.getId());
+////            tvAlamat.setText("Rating "+supplier.getAlamat());
+//        }
     }
 
     static class LoadHolder extends RecyclerView.ViewHolder {
@@ -95,12 +111,12 @@ public class SupplierAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public void notifyDataChanged() {
-        notifyDataChanged();
+        notifyDataSetChanged();
         isLoading =  false;
     }
 
     public interface OnLoadMoreListener {
-        public void onLoadMore();
+        void onLoadMore();
     }
 
     public void setLoadMoreListener(OnLoadMoreListener loadMoreListener) {
