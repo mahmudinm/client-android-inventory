@@ -96,7 +96,7 @@ public class SupplierFragment extends Fragment implements SupplierView{
 
     @Override
     public void statusSuccess(SupplierResponse supplierResponse) {
-//        suppliers.removeAll(suppliers);
+        suppliers.removeAll(suppliers);
         suppliers.addAll(supplierResponse.getData());
         adapter.notifyDataSetChanged();
     }
