@@ -4,6 +4,8 @@
 <img src="https://github.com/mahmudinm/client-android-inventory/blob/master/SCREENSHOT/Screenshot_2019-01-26-20-41-11-887_com.example.mahmudinm.androidcodeigniterinventory.png" width=256/>&nbsp;
 <img src="https://github.com/mahmudinm/client-android-inventory/blob/master/SCREENSHOT/Screenshot_2019-01-26-20-50-27-003_com.example.mahmudinm.androidcodeigniterinventory.png" width=256/>&nbsp;
 <img src="https://github.com/mahmudinm/client-android-inventory/blob/master/SCREENSHOT/Screenshot_2019-01-26-20-50-31-167_com.example.mahmudinm.androidcodeigniterinventory.png" width=256/>&nbsp;
+<img src="https://github.com/mahmudinm/client-android-inventory/blob/master/SCREENSHOT/Screenshot_2019-01-26-20-50-39-241_com.example.mahmudinm.androidcodeigniterinventory.png" width=256/>&nbsp;
+<img src="https://github.com/mahmudinm/client-android-inventory/blob/master/SCREENSHOT/Screenshot_2019-01-26-20-50-44-454_com.example.mahmudinm.androidcodeigniterinventory.png" width=256/>&nbsp;
 
 
 
