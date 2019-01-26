@@ -14,9 +14,15 @@ import com.example.mahmudinm.androidcodeigniterinventory.model.Supplier;
 import java.util.List;
 
 
-public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHolder> {
+public class SupplierAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    public final int TYPE_LIST = 0 ;
+    public final int TYPE_LOAD = 1 ;
 
     private List<Supplier> suppliers;
+    OnLoadMoreListener loadMoreListener;
+    boolean isLoading = false;
+    boolean isMoreDataAvailable = true;
 
     public SupplierAdapter(List<Supplier> suppliers) {
         this.suppliers = suppliers;
@@ -24,20 +30,32 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHo
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_supplier,
-                viewGroup, false);
-//        ButterKnife.bind(this, view);
-
-        return new ViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
+        if (i == TYPE_LIST) {
+            return new ListHolder(inflater.inflate(R.layout.list_supplier, viewGroup, false));
+        } else {
+            return new LoadHolder(inflater.inflate(R.layout.list_loading, viewGroup, false));
+        }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         Supplier supplier = suppliers.get(i);
-        viewHolder.nama.setText(supplier.getNama());
-        viewHolder.no_hp.setText(supplier.getNo_hp());
-        viewHolder.alamat.setText(supplier.getAlamat());
+
+        if (i >= getItemCount() -1 && isMoreDataAvailable && !isLoading && loadMoreListener !=
+                null) {
+            isLoading = true;
+            loadMoreListener.onLoadMore();
+        }
+
+        if (getItemViewType(i) == TYPE_LIST){
+            ListHolder listHolder = (ListHolder) viewHolder;
+            listHolder.nama.setText(supplier.getNama());
+            listHolder.no_hp.setText(supplier.getNo_hp());
+            listHolder.alamat.setText(supplier.getAlamat());
+        }
+
     }
 
     @Override
@@ -45,20 +63,48 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHo
         return suppliers.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return (position == suppliers.size()) ? TYPE_LOAD : TYPE_LIST;
+    }
+
     public Supplier getSupplier(int position) {
         return suppliers.get(position);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    static class ListHolder extends RecyclerView.ViewHolder {
 //        @BindView(R.id.nama) EditText nama;
         TextView nama, no_hp, alamat;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ListHolder(@NonNull View itemView) {
             super(itemView);
             nama = itemView.findViewById(R.id.nama);
             no_hp = itemView.findViewById(R.id.no_hp);
             alamat = itemView.findViewById(R.id.alamat);
         }
+    }
+
+    static class LoadHolder extends RecyclerView.ViewHolder {
+        public LoadHolder(@NonNull View itemView) {
+            super(itemView);
+        }
+    }
+
+    public void setMoreDataAvailable(boolean moreDataAvailable) {
+        isMoreDataAvailable = moreDataAvailable;
+    }
+
+    public void notifyDataChanged() {
+        notifyDataChanged();
+        isLoading =  false;
+    }
+
+    public interface OnLoadMoreListener {
+        public void onLoadMore();
+    }
+
+    public void setLoadMoreListener(OnLoadMoreListener loadMoreListener) {
+        this.loadMoreListener = loadMoreListener;
     }
 
 }

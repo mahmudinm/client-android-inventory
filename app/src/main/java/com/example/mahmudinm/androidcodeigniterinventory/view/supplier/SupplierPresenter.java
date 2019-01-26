@@ -24,7 +24,7 @@ public class SupplierPresenter {
     public void getSuppliers(String token) {
         view.showProgress();
         disposable.add(
-                apiInterface.getSuppliers(token)
+                apiInterface.getSuppliers(token, "")
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeWith(new DisposableObserver<SupplierResponse>(){
